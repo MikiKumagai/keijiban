@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        結果｜みんなでつくるランキング
+    </title>
+</head>
+
+<body>
+    <?php $RankName = "ランキング名"; echo $RankName ; ?><br>
+    1 <?php $No1 = "ああああ"; echo $No1; ?><br>
+    2 <?php $No2 = "いいいい"; echo $No2; ?><br>
+    3 <?php $No3 = "うううう"; echo $No3; ?><br>
+    4 <?php $No4 = "ええええ"; echo $No4; ?><br>
+    5 <?php $No5 = "おおおお"; echo $No5; ?><br>
+    棒グラフもつけたい<br>
+    <a href="">投票はこちら</a><br>
+
+    <?php
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        writeData();
+    }
+    
+    function writeData(){
+        $contents = $_POST['contents'];
+        $contents = nl2br($contents);
+    
+        $data = "<hr>";
+        $data = "<p>".$contents."</p>".$data ;
+    
+        $keijban_file = 'keijiban.html';
+    
+        $fp = fopen($keijban_file, 'ab');
+    
+        if ($fp){
+            if (flock($fp, LOCK_EX)){
+                if (fwrite($fp,  $data) === FALSE){
+                    print('ファイル書き込みに失敗しました');
+                }
+    
+                flock($fp, LOCK_UN);
+            }else{
+                print('ファイルロックに失敗しました');
+            }
+        }
+        fclose($fp);
+    }
+    
+    ?>
+
+ <br>
+ <iframe src="keijiban.html" name="hyouzi" width="700" height="450">
+ </iframe>
+
+ <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>"><br>
+    <textarea name="contents" rows="5" cols="97"></textarea><br>
+    <input type="submit" value="投稿する">
+    </form>
+
+</body>
+
+</html>
