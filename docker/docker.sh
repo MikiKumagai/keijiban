@@ -7,7 +7,7 @@ NAME=keijiban
 IMAGE_NAME=${NAME}-image
 CONTAINER_NAME=${NAME}-container
 
-docker build -t ${IMAGE_NAME}  -f ${SCRIPT_DIR}/Dockerfile .
+docker build -t ${IMAGE_NAME} -f ${SCRIPT_DIR}/Dockerfile .
 docker run --rm \
     --name ${CONTAINER_NAME} \
     -p 80:80 \
