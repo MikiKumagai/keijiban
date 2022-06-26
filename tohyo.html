@@ -8,8 +8,33 @@
 </head>
 
 <body>
-    <?php 
-    <input type="radio" name="sex" value="male">男<br>
-    <input type="radio" name="sex" value="female">女;
-?>
+
+    <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>"><br>
+        <input type="radio" name="cs" value="1">ああああ<br>
+        <input type="radio" name="cs" value="2">いいいい<br>
+        <input type="radio" name="cs" value="3">うううう<br>
+        <input type="radio" name="cs" value="4">ええええ<br>
+        <input type="radio" name="cs" value="5">おおおお<br>
+        <input type="submit" value="投票"><br>
+
+    <?php
+    $log_file = 'log.txt';
+    $fp = fopen($log_file, 'r+b');
+
+    if ($fp){
+        if (flock($fp, LOCK_EX)){
+            flock($fp, LOCK_UN);
+        }else{
+            print('ファイルロックに失敗しました');
+        }
+    }
+    fclose($fp);
+    ?>
+
+
+        <br>
+        その他：<input type="text" name="entry" size="40"><br>
+        <input type="submit" value="エントリー">
+    </form>
+
 </body>
