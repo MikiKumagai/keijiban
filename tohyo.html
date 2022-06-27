@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>投票｜みんなでつくるランキング</title>
+    </head>
 
-<head>
-    <title>
-        投票｜みんなでつくるランキング
-    </title>
-</head>
+    <body>
+        <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>">
+            <br />
+            <input type="radio" name="select" value="1" />ああああ<br />
+            <input type="radio" name="select" value="2" />いいいい<br />
+            <input type="radio" name="select" value="3" />うううう<br />
+            <input type="radio" name="select" value="4" />ええええ<br />
+            <input type="radio" name="select" value="5" />おおおお<br />
+            <input type="radio" name="select" value="6" />かかかか<br />
+            <input type="submit" value="投票" /><br />
 
-<body>
+            <br />
 
-    <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>"><br>
-        <input type="radio" name="select" value="1">ああああ<br>
-        <input type="radio" name="select" value="2">いいいい<br>
-        <input type="radio" name="select" value="3">うううう<br>
-        <input type="radio" name="select" value="4">ええええ<br>
-        <input type="radio" name="select" value="5">おおおお<br>
-        <input type="radio" name="select" value="6">かかかか<br>
-        <input type="submit" value="投票"><br>
-
-        <br>
-
-        その他：<input type="text" name="entry" size="40"><br>
-        <input type="submit" value="エントリー">
-    </form>
-</body>
+            その他：<input type="text" name="entry" size="40" /><br />
+            <input type="submit" value="エントリー" />
+        </form>
+    </body>
+</html>
 
 <?php
     $log_file = '../logs/log.txt';
