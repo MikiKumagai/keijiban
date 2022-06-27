@@ -16,6 +16,14 @@
     5 <?php $No5 = "おおおお"; echo $No5; ?><br>
     
     <a href="tohyo.html">投票はこちら</a><br>
+ <br>
+ <iframe src="keijiban.html" name="hyouzi" width="700" height="450">
+ </iframe>
+
+ <form method="POST" action="<?php print htmlspecialchars($_SERVER['PHP_SELF']) ?>"><br>
+    <textarea name="contents" rows="5" cols="97"></textarea><br>
+    <input name="submit" type="submit" value="投稿する">
+    </form>
 
     <?php
 
@@ -50,14 +58,6 @@
     
     ?>
 
- <br>
- <iframe src="keijiban.html" name="hyouzi" width="700" height="450">
- </iframe>
-
- <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>"><br>
-    <textarea name="contents" rows="5" cols="97"></textarea><br>
-    <input type="submit" value="投稿する">
-    </form>
 
 </body>
 
