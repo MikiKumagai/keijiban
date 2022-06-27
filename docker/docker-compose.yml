@@ -10,6 +10,7 @@ services:
       - "80:80"
     volumes:
       - ./../:/var/www/html
+      - ./../logs/:/var/www/logs
 
   keijiban-mysql:
     image: mysql
