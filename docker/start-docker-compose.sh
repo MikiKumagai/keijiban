@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eux
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+DATA_FILES="${SCRIPT_DIR}/../keijiban.html ${SCRIPT_DIR}/../log.txt"
+touch ${DATA_FILES} && chmod 666 ${DATA_FILES}
+
+docker-compose -f ${SCRIPT_DIR}/docker-compose.yml up --build -d
