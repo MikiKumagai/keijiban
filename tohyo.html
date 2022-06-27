@@ -31,8 +31,8 @@
     $select = filter_input(INPUT_POST, 'select');
 
     //2 戻り値を検証してロックする
-    if ($fp){
-        if (flock($fp, LOCK_EX)){
+    if ($fp) {
+        if (flock($fp, LOCK_EX)) {
 
             //3 fgetで各行を読み出す・4 前後の空白をトリミングする→格納していく
             while(!feof($fp)) { 
@@ -51,10 +51,10 @@
             rewind($fp);
 
             //7 書き込みを保存する
-            if ($select != "" && fwrite($fp, $select) === FALSE){
+            if ($select != "" && fwrite($fp, $select) === FALSE) {
                 print('ファイル書き込みに失敗しました');
             }
-        }else{
+        } else {
             print('ファイルロックに失敗しました');
         }
         flock($fp, LOCK_UN);
