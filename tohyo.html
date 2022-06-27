@@ -28,7 +28,7 @@
 
     //1 ファイルを指定して開く
     $fp = fopen($log_file, 'r+b');
-    $select = $_POST['select'];
+    $select = filter_input(INPUT_POST, 'select');
 
     //2 戻り値を検証してロックする
     if ($fp){
@@ -51,7 +51,7 @@
             rewind($fp);
 
             //7 書き込みを保存する
-            if (fwrite($fp, $select) === FALSE){
+            if ($select != "" && fwrite($fp, $select) === FALSE){
                 print('ファイル書き込みに失敗しました');
             }
         }else{
