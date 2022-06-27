@@ -9,32 +9,59 @@
 
 <body>
 
-    <form method="POST" action="<?php print($_SERVER['PHP_SELF']) ?>"><br>
-        <input type="radio" name="cs" value="1">ああああ<br>
-        <input type="radio" name="cs" value="2">いいいい<br>
-        <input type="radio" name="cs" value="3">うううう<br>
-        <input type="radio" name="cs" value="4">ええええ<br>
-        <input type="radio" name="cs" value="5">おおおお<br>
+    <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>"><br>
+        <input type="radio" name="select" value="1">ああああ<br>
+        <input type="radio" name="select" value="2">いいいい<br>
+        <input type="radio" name="select" value="3">うううう<br>
+        <input type="radio" name="select" value="4">ええええ<br>
+        <input type="radio" name="select" value="5">おおおお<br>
+        <input type="radio" name="select" value="6">かかかか<br>
         <input type="submit" value="投票"><br>
 
-    <?php
-    $log_file = 'log.txt';
-    $fp = fopen($log_file, 'r+b');
-
-    if ($fp){
-        if (flock($fp, LOCK_EX)){
-            flock($fp, LOCK_UN);
-        }else{
-            print('ファイルロックに失敗しました');
-        }
-    }
-    fclose($fp);
-    ?>
-
-
         <br>
+
         その他：<input type="text" name="entry" size="40"><br>
         <input type="submit" value="エントリー">
     </form>
-
 </body>
+
+<?php
+    $log_file = '../logs/log.txt';
+
+    //1 ファイルを指定して開く
+    $fp = fopen($log_file, 'r+b');
+    $select = $_POST['select'];
+
+    //2 戻り値を検証してロックする
+    if ($fp){
+        if (flock($fp, LOCK_EX)){
+
+            //3 fgetで各行を読み出す・4 前後の空白をトリミングする→格納していく
+            while(!feof($fp)) { 
+                $results[] = trim(fgets($fp));
+            }
+
+            //5 選択された項目を加算する
+            if($select == 1) $results[1]++;
+            if($select == 2) $results[2]++;
+            if($select == 3) $results[3]++;
+            if($select == 4) $results[4]++;
+            if($select == 5) $results[5]++;
+            if($select == 6) $results[6]++;
+        
+            //6 ファイルポイントを先頭に戻す
+            rewind($fp);
+
+            //7 書き込みを保存する
+            if (fwrite($fp, $select) === FALSE){
+                print('ファイル書き込みに失敗しました');
+            }
+        }else{
+            print('ファイルロックに失敗しました');
+        }
+        flock($fp, LOCK_UN);
+    }
+
+    //8 ファイルを閉じる
+    fclose($fp);
+?>
