@@ -48,13 +48,13 @@
 ?>
 
 <?php
+    $result = [];
+
     if (isset($_POST['test'])) {
-
-        $result = "";
-
         $dsn = 'mysql:host=localhost;dbname=keijiban';
         $user = 'root';
         $password = 'password';
+
         try {
             $pdo = new PDO($dsn, $user, $password);
 
@@ -67,5 +67,5 @@
             die();
         }
     }
-    echo $result;
+    print_r($result);
 ?>
