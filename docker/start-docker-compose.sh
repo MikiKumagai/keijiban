@@ -4,7 +4,7 @@ set -eux
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
-DATA_FILES="${SCRIPT_DIR}/../keijiban.html ${SCRIPT_DIR}/../logs/log.txt"
+DATA_FILES="${SCRIPT_DIR}/../htdocs/keijiban.html ${SCRIPT_DIR}/../logs/log.txt"
 mkdir -p ${SCRIPT_DIR}/../logs
 touch ${DATA_FILES} && chmod 666 ${DATA_FILES}
 

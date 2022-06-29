@@ -17,19 +17,24 @@
     <?php $No3 = "うううう"; echo $No3; ?><br>
 
     <a href="tohyo.html">投票はこちら</a><br>
+
     <br>
     <iframe src="keijiban.html" name="hyouzi" width="700" height="450">
     </iframe>
-
     <br />
-    <iframe src="keijiban.html" name="hyouzi" width="700" height="450">
-    </iframe>
 
     <form method="POST" action="<?php print htmlspecialchars($_SERVER['PHP_SELF']) ?>">
         <br />
         <textarea name="contents" rows="5" cols="97"></textarea><br />
         <input type="submit" value="投稿する" />
     </form>
+
+    <br>
+
+    <form method="POST">
+        <input type="submit" name="test" value="DBテスト">
+    </form>
+
 </body>
 
 </html>
@@ -40,4 +45,27 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         writeData();
     }
+?>
+
+<?php
+    if (isset($_POST['test'])) {
+
+        $result = "";
+
+        $dsn = 'mysql:host=localhost;dbname=keijiban';
+        $user = 'root';
+        $password = 'password';
+        try {
+            $pdo = new PDO($dsn, $user, $password);
+
+            $sql = "SELECT choice FROM touhyou";
+            $stmt = $pdo->query($sql);
+            $result = $stmt->fetchAll();
+
+        }catch (PDOException $e){
+            print('Error:'.$e->getMessage());
+            die();
+        }
+    }
+    echo $result;
 ?>

@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./../:/var/www/html
+      - ./../htdocs:/var/www/html
       - ./../logs/:/var/www/logs
 
   keijiban-mysql:
