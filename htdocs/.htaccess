@@ -1,7 +1,0 @@
-# 文字化け防止(docker)
- AddDefaultCharset UTF-8
-
-# html上の埋め込みphpを動作するようにする(docker)
- <FilesMatch "\.html$">
-   AddType application/x-httpd-php .html
- </FilesMatch>
