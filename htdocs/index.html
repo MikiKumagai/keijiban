@@ -46,26 +46,3 @@
         writeData();
     }
 ?>
-
-<?php
-    $result = [];
-
-    if (isset($_POST['test'])) {
-        $dsn = 'mysql:host=localhost;dbname=keijiban';
-        $user = 'root';
-        $password = 'password';
-
-        try {
-            $pdo = new PDO($dsn, $user, $password);
-
-            $sql = "SELECT choice FROM touhyou";
-            $stmt = $pdo->query($sql);
-            $result = $stmt->fetchAll();
-
-        }catch (PDOException $e){
-            print('Error:'.$e->getMessage());
-            die();
-        }
-    }
-    print_r($result);
-?>
