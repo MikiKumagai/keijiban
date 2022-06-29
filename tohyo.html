@@ -3,12 +3,13 @@
 
 <head>
     <title>
-        投票｜みんなでつくるランキング
+        投票｜三大○○
     </title>
 </head>
 
 <body>
 
+    どれかひとつに投票してください
     <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>"><br>
         <input type="radio" name="select" value="1">ああああ<br>
         <input type="radio" name="select" value="2">いいいい<br>
@@ -23,6 +24,8 @@
         その他：<input type="text" name="entry" size="40"><br>
         <input type="submit" value="エントリー">
     </form>
+
+    <a href="index.html">戻る</a>
 </body>
 
 <?php
@@ -53,9 +56,9 @@
             rewind($fp);
 
             //7 書き込みを保存する
-            if (fwrite($fp, $select) === FALSE){
-                print('ファイル書き込みに失敗しました');
-            }
+            foreach($results as $value) {
+                fwrite($fp, $value . "\n");
+              }
         }else{
             print('ファイルロックに失敗しました');
         }
