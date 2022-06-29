@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <br />
 
     どれかひとつに投票してください
     <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>"><br>
@@ -33,11 +34,11 @@
 
     //1 ファイルを指定して開く
     $fp = fopen($log_file, 'r+b');
-    $select = $_POST['select'];
+    $select = filter_input(INPUT_POST, 'select');
 
     //2 戻り値を検証してロックする
-    if ($fp){
-        if (flock($fp, LOCK_EX)){
+    if ($fp) {
+        if (flock($fp, LOCK_EX)) {
 
             //3 fgetで各行を読み出す・4 前後の空白をトリミングする→格納していく
             while(!feof($fp)) { 
