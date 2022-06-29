@@ -14,10 +14,12 @@ services:
 
   keijiban-mysql:
     image: mysql
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - 37214:37214
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_TCP_PORT=37214
-      - MYSQL_DATABASE=test
+      - MYSQL_TCP_PORT=3306
+      - MYSQL_DATABASE=keijiban
       - BIND-ADDRESS=0.0.0.0
