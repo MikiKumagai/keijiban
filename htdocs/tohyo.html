@@ -1,35 +1,75 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>投票｜三大○○</title>
+    </head>
 
-<head>
-    <title>
-        投票｜三大○○
-    </title>
-</head>
+    <body>
+        <br />
 
-<body>
-    <br />
+        どれかひとつに投票してください<br />
+        <form method="POST"><br />
+            <?php
+                $result = [];
+                $select = filter_input(INPUT_POST, "select");
+                $dsn = "mysql:host=keijiban-mysql;dbname=keijiban";
+                $user = "root";
+                $password = "password";
+                if (isset($_POST["tohyo"]) && $select != "") {
 
-    どれかひとつに投票してください
-    <form method="POST" action="<?php print($_SERVER['PHP_SELF']); ?>"><br>
-        <input type="radio" name="select" value="1">ああああ<br>
-        <input type="radio" name="select" value="2">いいいい<br>
-        <input type="radio" name="select" value="3">うううう<br>
-        <input type="radio" name="select" value="4">ええええ<br>
-        <input type="radio" name="select" value="5">おおおお<br>
-        <input type="radio" name="select" value="6">かかかか<br>
-        <input type="submit" value="投票"><br>
+                    try {
+                        $pdo = new PDO($dsn, $user, $password);
+                        $sql = "SELECT count FROM tohyo WHERE id=${select}";
+                        $stmt = $pdo->query($sql);
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        <br>
+                        $increment = $result[0]["count"] + 1;
+                        $sql = "UPDATE tohyo SET count=${increment} WHERE id=${select}";
+                        $stmt = $pdo->query($sql);
+                    } catch (PDOException $e) {
+                        print('Error:'.$e->getMessage());
+                        die();
+                    }
+                }
+            ?>
+            <?php
+                $result = [];
 
-        その他：<input type="text" name="entry" size="40"><br>
-        <input type="submit" value="エントリー">
-    </form>
+                try {
+                    $pdo = new PDO($dsn, $user, $password);
+                    $sql = "SELECT * FROM tohyo";
+                    $stmt = $pdo->query($sql);
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                } catch (PDOException $e) {
+                    print('Error:'.$e->getMessage());
+                    die();
+                }
+                foreach($result as $value) {
+                    $input = "<input type=\"radio\" name=\"select\" value=\"${value["id"]}\"/>${value["choice"]}: ${value["count"]}<br />";
+                    print_r($input);
+                }
+            ?>
+            <input type="submit" name="tohyo" value="投票" /><br />
+        </form>
 
-    <a href="index.html">戻る</a>
-</body>
+        <br />
 
-<?php
+        <form method="POST">
+            <br />
+            その他：<input type="text" name="entry" size="40" /><br />
+            <input type="submit" value="エントリー" />
+        </form>
+
+        <br />
+
+        <a href="index.html">戻る</a>
+
+        <form method="POST">
+            <input type="submit" name="test" value="DBテスト" />
+        </form>
+    </body>
+
+    <?php
     $log_file = '../logs/log.txt';
 
     //1 ファイルを指定して開く
@@ -69,3 +109,4 @@
     //8 ファイルを閉じる
     fclose($fp);
 ?>
+</html>
