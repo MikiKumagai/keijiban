@@ -5,3 +5,7 @@
  <FilesMatch "\.html$">
    AddType application/x-httpd-php .html
  </FilesMatch>
+
+ # rewriteでページを複製する
+
+ 

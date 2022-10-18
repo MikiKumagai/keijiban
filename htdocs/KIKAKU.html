@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        企画｜三大○○
+    </title>
+</head>
+
+<body>
+ 
+    <form method="POST" action="plan-insert.php">
+        企画名<br>
+        三大<input type="text" name="theme" size="30"><br>
+        <br>
+        カテゴリー：<br>
+        <input type="radio" name="category" value="1">科学
+        <input type="radio" name="category" value="2">生活
+        <input type="radio" name="category" value="3">文化
+        <input type="radio" name="category" value="4">芸術<br>
+        <!-- <select name="category">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            </select><br> -->
+        <br>
+        注意事項：<br>
+            <textarea name="comment" rows="4" cols="45"></textarea><br>
+            <input type="submit" value="送信">
+    </form><br>
+
+    <a href="TOP.html">戻る</a>
+
+</body>
+
+</html>

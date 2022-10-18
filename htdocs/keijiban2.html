@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        掲示板
+    </title>
+</head>
+
+<body>
+
+    <?php
+
+    try {
+        $pdo = new PDO(
+            'mysql:host=localhost;dbname=keijiban;','kmmk','uwfyzcyr',
+            [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+        );
+    
+        $stmt = $pdo->prepare('select row_number() over(order by date ASC) NUM, date, contents from BBS');
+        $stmt->execute();
+
+        foreach ($stmt as $row) {
+            echo $row['NUM'];
+            echo '<br>';
+            echo nl2br($row['contents']);
+            echo '<br>';
+            echo '<p style="text-align:right">';
+            echo $row['date'];
+            echo '</p>';
+            echo '<hr>';
+        }
+    
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    
+    } finally {
+        $pdo = null;
+    }
+
+?>
+</body>

@@ -1,0 +1,24 @@
+<html>
+<head><title>kekka</title></head>
+<body>
+
+    <?php
+    
+        try{
+            $db = new PDO('mysql:dbname=tohyo;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            $sql = $db->prepare('SELECT * FROM vote ORDER BY count DESC');
+            $sql->execute();
+            echo '<form action="vote-update.php" method="post">';
+            foreach ($sql as $row) {
+                echo '<input type="radio" name="vote" value="'.$row['id'].'">'.$row['name'].' '.$row['count'].'票';
+                echo '<br>';
+            }
+            echo '<input type="submit" value="投票">';
+            echo '</form>';
+            } catch(PDOException $e){
+            echo 'エラーが発生しました' . $e->getMessage();
+        }
+
+?>
+</body>
+</html>
