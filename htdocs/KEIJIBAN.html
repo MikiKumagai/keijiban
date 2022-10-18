@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        結果｜三大○○
+    </title>
+</head>
+
+<body>
+    <b>三大
+        <?php $theme = "企画名を表示"; echo $theme ; ?>
+    </b><br>
+    <iframe src="keijiban1.html" name="kekka" width="700" height="130">
+    </iframe><br>
+    <?php $planner = "企画者コメントを表示"; echo $planner ; ?><br>
+    <a href="tohyo.html">投票はこちら</a><br>
+
+    <br>
+    <iframe src="keijiban2.html" name="hyouzi" width="700" height="450">
+    </iframe>
+    <br />
+
+    <form method="POST" action="writeData.php">
+        <textarea name="contents" rows="5" cols="97"></textarea><br />
+        <input type="submit" value="投稿する" />
+    </form>
+
+    <a href="TOP.html">戻る</a>
+
+</body>
+
+</html>
