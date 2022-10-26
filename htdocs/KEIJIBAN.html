@@ -12,18 +12,25 @@
 
     try {
         $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-        [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-    );
+        [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
+ 
+    } catch(PDOException $e){
+        echo 'エラーが発生しました' . $e->getMessage();
+    }
 
-    $stmt = $pdo->prepare('SELECT * FROM plan WHERE thread_id = NULL ');
-    $stmt->execute();
+$Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
+$Data->execute(array($_REQUEST['thread_id']));
+$hyouji = $Data->fetch();
 
+?>
 
-     $theme = "企画名を表示"; echo $theme ; ?>ランキング
+    <?php echo $hyouji['theme'] ;
+    echo 'ランキング'; ?>
     <br>
     <iframe src="keijiban1.html" name="kekka" width="700" height="140">
     </iframe><br>
-    企画者コメントを表示<br>
+    <?php echo $hyouji['comment'] ; ?>
+    <br>
     <a href="tohyo.html">投票はこちら</a><br>
 
     <br>
