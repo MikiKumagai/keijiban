@@ -6,11 +6,11 @@
 
 try {
     $pdo = new PDO(
-        'mysql:host=localhost;dbname=tohyo;','kmmk','uwfyzcyr',
+        'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
         [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
     );
 
-    $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id = NULL ORDER BY count DESC LIMIT 5');
+    $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 5');
     $stmt->execute();
 
     foreach ($stmt as $row) {
