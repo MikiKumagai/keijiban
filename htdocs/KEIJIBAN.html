@@ -14,34 +14,69 @@
         $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
         [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
  
-    } catch(PDOException $e){
-        echo 'エラーが発生しました' . $e->getMessage();
+        } catch(PDOException $e){
+            echo 'エラーが発生しました' . $e->getMessage();
+        }
+
+         $Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
+         $Data->execute(array($_REQUEST['thread_id']));
+         $hyouji = $Data->fetch();
+
+         echo $hyouji['theme'];
+         echo 'ランキング';
+         echo '<br>';
+         echo $hyouji['comment'];
+         $thread_id = $hyouji['thread_id'];
+
+         echo '<br>';
+
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 5');
+        $stmt->execute(array($hyouji['thread_id']));
+    
+        foreach ($stmt as $row) {
+            echo '◎'.$row['name'].'<br>';
+        }
+    
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    
+    } finally {
+        $pdo = null;
     }
-
-$Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
-$Data->execute(array($_REQUEST['thread_id']));
-$hyouji = $Data->fetch();
-
-?>
-
-    <?php echo $hyouji['theme'] ;
-    echo 'ランキング'; ?>
+    
+    ?>
     <br>
-    <iframe src="keijiban1.html" name="kekka" width="700" height="140">
-    </iframe><br>
-    <?php echo $hyouji['comment'] ; ?>
-    <br>
-    <a href="tohyo.html">投票はこちら</a><br>
+    
+    <a href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票はこちら</a><br>
 
     <br>
-    <iframe src="keijiban2.html" name="hyouzi" width="700" height="450">
+    <iframe src="http://localhost/keijiban2.html?thread_id=<?php echo $thread_id; ?>" name="hyouzi" width="700" height="450">
     </iframe>
     <br />
 
-    <form method="POST" action="writeData.php">
+    <form method="POST" action="">
         <textarea name="contents" rows="5" cols="97"></textarea><br />
         <input type="submit" value="投稿する" />
     </form>
+
+<?php
+
+    if(!empty($_POST['contents'])){
+    try{
+        $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+
+        $contents = $_POST['contents'];
+ 
+
+        $sql2 = $db->prepare('INSERT INTO BBS(contents, date, thread_id) VALUES(:contents, NOW(), :thread_id)');
+        $sql2->execute(array(':contents' => $contents, ':thread_id' => $thread_id));
+        
+    } catch(PDOException $e){
+        echo 'DB接続エラー' . $e->getMessage();
+    }
+    }
+?>
 
     <a href="TOP.html">戻る</a>
 

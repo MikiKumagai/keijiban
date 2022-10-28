@@ -18,7 +18,7 @@
         );
     
         $stmt = $pdo->prepare('select row_number() over(order by date ASC) NUM, date, contents from BBS WHERE thread_id=?');
-        $stmt->execute();
+        $stmt->execute(array($_REQUEST['thread_id']));
 
         foreach ($stmt as $row) {
             echo $row['NUM'];

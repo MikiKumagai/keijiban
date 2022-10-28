@@ -10,15 +10,61 @@
 <body>
     <br />
 
-    どれかひとつに投票してください<br>
-    <iframe src="tohyo1.html" name="entry" width="700" height="300">
-    </iframe><br>
+    <?php
+    
+        try{
+            $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            
+            $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');
+            $Data->execute(array($_REQUEST['thread_id']));
+            $hyouji = $Data->fetch();
+            
+            $thread_id = $hyouji['thread_id'];
 
-    <form method="POST" action="vote-insert.php"><br>
+            $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=:thread_id ORDER BY count DESC');
+            $sql->execute(array('thread_id'=>$thread_id));
+            
+           
+            echo 'どれかひとつに投票してください<br>';
+
+            echo '<form action="vote-update.php" method="post">';
+            foreach ($sql as $row) {
+                echo '<input type="radio" name="vote" value="'.$row['id'].'">'.$row['name'].' '.$row['count'].'票';
+                echo '<br>';
+            }
+            echo '<input type="submit" value="投票">';
+            echo '</form>';
+            } catch(PDOException $e){
+            echo 'エラーが発生しました' . $e->getMessage();
+        }
+
+?>
+
+    
+
+    <form method="POST" action=""><br>
         <input type="radio" name="vote" value=1>
         その他：<input type="text" name="entry" size="40"><br>
         <input type="submit" value="エントリー">
     </form>
+
+    <?php
+    
+    if(!empty($_POST['entry'])){
+        try{
+            $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+
+            $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 1, id = ?, thread_id = ?');
+            $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
+            echo '投票完了';
+            echo '<br>';
+            echo '<a href="tohyo.html">戻る</a>';
+            } catch(PDOException $e){
+            echo 'エラーが発生しました' . $e->getMessage();
+        }
+    }
+
+?>
 
     <a href="keijiban.html">戻る</a>
 
