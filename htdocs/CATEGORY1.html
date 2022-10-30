@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+    カテゴリー
+    </title>
+</head>
+
+<body>
+   
+    <?php
+
+        try {
+            $pdo = new PDO(
+                'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
+                [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+            );
+
+            $stmt = 'select * from plan WHERE category=1 order by thread_id DESC';
+            $pdo -> query($stmt);
+    
+            foreach ($pdo -> query($stmt) as $row) {
+                echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">{$row['theme']}</a>";
+                echo '<br>';
+              }
+        
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        
+        } finally {
+            $pdo = null;
+        }
+    
+    ?> 
+    
+    <a href="TOP.html">戻る</a>
+</body>
+
+</html>
