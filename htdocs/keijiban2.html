@@ -17,16 +17,19 @@
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
     
-        $stmt = $pdo->prepare('select row_number() over(order by date ASC) NUM, date, contents from BBS WHERE thread_id=?');
+        $stmt = $pdo->prepare('SELECT * FROM bbs WHERE thread_id=? ORDER BY date DESC');
         $stmt->execute(array($_REQUEST['thread_id']));
+        $row_count = $stmt->rowCount();
 
-        foreach ($stmt as $row) {
-            echo $row['NUM'];
+        foreach ($stmt as $hyouji) {
+            echo $row_count, ' ';
+            $row_count -= 1;
+            echo $hyouji['name'];
             echo '<br>';
-            echo nl2br($row['contents']);
+            echo nl2br($hyouji['contents']);
             echo '<br>';
             echo '<p style="text-align:right">';
-            echo $row['date'];
+            echo $hyouji['date'];
             echo '</p>';
             echo '<hr>';
         }

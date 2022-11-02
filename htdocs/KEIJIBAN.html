@@ -31,11 +31,12 @@
          echo '<br>';
 
     try {
-        $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 5');
+        $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
         $stmt->execute(array($hyouji['thread_id']));
     
         foreach ($stmt as $row) {
-            echo '◎'.$row['name'].'<br>';
+            echo '◎';
+            echo $row['name'].'<br>';
         }
     
     } catch (PDOException $e) {
@@ -46,8 +47,7 @@
     }
     
     ?>
-    <br>
-    
+   
     <a href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票はこちら</a><br>
 
     <br>
@@ -55,7 +55,9 @@
     </iframe>
     <br />
 
+    <br>
     <form method="POST" action="">
+        名前：<input type="text" name="name" value="名無し" cols="97" />
         <textarea name="contents" rows="5" cols="97"></textarea><br />
         <input type="submit" value="投稿する" />
     </form>
@@ -66,11 +68,11 @@
     try{
         $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
+        $name = $_POST['name'];
         $contents = $_POST['contents'];
- 
 
-        $sql2 = $db->prepare('INSERT INTO BBS(contents, date, thread_id) VALUES(:contents, NOW(), :thread_id)');
-        $sql2->execute(array(':contents' => $contents, ':thread_id' => $thread_id));
+        $sql2 = $db->prepare('INSERT INTO BBS(contents, date, thread_id, name) VALUES(:contents, NOW(), :thread_id, :name)');
+        $sql2->execute(array(':contents' => $contents, ':thread_id' => $thread_id, ':name'=>$name));
         
     } catch(PDOException $e){
         echo 'DB接続エラー' . $e->getMessage();

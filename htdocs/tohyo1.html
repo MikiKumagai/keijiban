@@ -5,10 +5,17 @@
     <?php
     
         try{
-            $db = new PDO('mysql:dbname=tohyo;host=localhost;charset=utf8','kmmk','uwfyzcyr');
-            $sql = $db->prepare('SELECT * FROM vote ORDER BY count DESC');
-            $sql->execute();
-            echo '<form action="vote-update.php" method="post">';
+            $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            
+            $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');
+            $Data->execute(array($_REQUEST['thread_id']));
+            $hyouji = $Data->fetch();
+            $thread_id = $hyouji['thread_id'];
+
+            $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
+            $sql->execute(array($_REQUEST['thread_id']));
+            
+            echo '<form action="" method="post">';
             foreach ($sql as $row) {
                 echo '<input type="radio" name="vote" value="'.$row['id'].'">'.$row['name'].' '.$row['count'].'票';
                 echo '<br>';
@@ -18,6 +25,18 @@
             } catch(PDOException $e){
             echo 'エラーが発生しました' . $e->getMessage();
         }
+
+        if(!empty($_POST['vote'])){
+            try{
+                $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+                    
+                  $sql = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
+                  $sql->execute(array($_POST['vote']));
+                  
+                } catch(PDOException $e){
+                  echo 'エラーが発生しました' . $e->getMessage();
+                }
+            }
 
 ?>
 </body>
