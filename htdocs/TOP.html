@@ -5,32 +5,52 @@
     <title>
         主観できめるランキング
     </title>
-    <link rel="stylesheet" href="TOP.css">
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
 </head>
 
 <body>
-  <div class="header">
-    <h1>タイトル</h1>
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="TOP.html">三大○○</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="GAIYO.html">サイトの説明</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                カテゴリー
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="CATEGORY1.html">生活</a>
+                <a class="dropdown-item" href="CATEGORY2.html">文化</a>
+                <a class="dropdown-item" href="CATEGORY3.html">科学</a>
+                <a class="dropdown-item" href="CATEGORY3.html">芸術</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="KIKAKU.html">新しい企画を作る</a><br>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">リンク</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <div class="menu">
-      <a href="GAIYO.html">サイトの説明</a> / 
-      <a href="KIKAKU.html">新しい企画を作る</a> / 
-      twitter / youtube<br>
-    </div>
-  </div>
-    <br>
-
-    <div class="main">
-
-      <div class="contents1">
-        <?php
+      <div class="col">
+       <?php
 
         try {
             $pdo = new PDO(
                 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
                 [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
             );
-            $sql = "SELECT * FROM plan";
+            $sql = "SELECT * FROM plan ORDER BY thread_id DESC";
             $pdo -> query($sql);
 
             foreach ($pdo -> query($sql) as $row) {
@@ -45,19 +65,10 @@
             $pdo = null;
         }
     
-    ?>
-        <!-- <iframe src="top1.html" name="kekka" height="700">
-        </iframe> -->
+        ?>
       </div>
-
-      <div class="contents2">
-        <a href="CATEGORY1.html">生活</a><br>
-        <a href="CATEGORY2.html">文化</a><br>
-        <a href="CATEGORY3.html">科学</a><br>
-        <a href="CATEGORY4.html">芸術</a><br>
-        </div>
-
     </div>
+  </div>
 
 </body>
 
