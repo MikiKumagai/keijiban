@@ -10,31 +10,35 @@
 
 <body>
   <div class="container">
-    <div class="row">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand navbar-light bg-light">
         <a class="navbar-brand" href="TOP.html">三大○○</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="GAIYO.html">はじめに</a>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="KIKAKU.html">新規スレッド作成</a><br>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                カテゴリ
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
+                <li><a class="dropdown-item" href="CATEGORY1.html">文化</a></li>
+                <li><a class="dropdown-item" href="CATEGORY1.html">科学</a></li>
+                <li><a class="dropdown-item" href="CATEGORY3.html">芸術</a></li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://twitter.com/____kmmk">twitter</a><br>
+              <a class="nav-link" href="KIKAKU.html">新規スレッド作成</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/____kmmk">twitter</a>
             </li>
           </ul>
         </div>
       </nav>
-      <div class="col-md-4">
-           <a href="CATEGORY1.html">生活</a>
-           <a href="CATEGORY2.html">文化</a>
-           <a href="CATEGORY3.html">科学</a>
-           <a href="CATEGORY3.html">芸術</a>
-      </div>
-      <div class="col-md-8">
+    <div class="row">
+      <div class="col">
        <?php
 
         try {
@@ -75,6 +79,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
           integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
           crossorigin="anonymous"></script>
+
 
 </body>
 
