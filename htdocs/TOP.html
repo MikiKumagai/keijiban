@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
   </head>
 
-<body>
+<body style="padding-top: 5rem">
   <div class="container">
-      <nav class="navbar navbar-expand navbar-light bg-light">
-        <a class="navbar-brand" href="TOP.html">三大○○</a>
+      <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="TOP.html">　三大○○</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -50,7 +50,8 @@
             $pdo -> query($sql);
 
             foreach ($pdo -> query($sql) as $row) {
-              echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">{$row['theme']}</a>";
+              echo '<br>';
+              echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">三大{$row['theme']} {$row['date']}</a>";
               echo '<br>';
             }
 
