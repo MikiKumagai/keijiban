@@ -7,7 +7,7 @@
 
     try {
         $pdo = new PDO(
-            'mysql:host=localhost;dbname=kikaku;','kmmk','uwfyzcyr',
+            'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
             [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
         );
     
@@ -15,7 +15,7 @@
         $stmt->execute();
 
         foreach ($stmt as $row) {
-            echo '<a href="KEIJIBAN.html">◎</a>';
+            echo '<a href="KEIJIBAN.html?thread_id=?">◎</a>';
             echo $row['theme'];
             echo $row['category'];
             echo '<hr>';
