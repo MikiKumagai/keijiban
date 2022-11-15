@@ -25,9 +25,9 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY1.html">文化</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY1.html">科学</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY3.html">芸術</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY2.html">文化</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY3.html">科学</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY4.html">芸術</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -56,7 +56,7 @@
 
     ?>
 
-どれかひとつに投票してください
+1人3つ投票できます
         <br>
         <iframe src="http://localhost/tohyo1.html?thread_id=<?php echo $thread_id; ?>" name="hyouzi" width="700" height="450">
         </iframe>
@@ -68,6 +68,7 @@
         その他：<input type="text" name="entry" size="40"><br>
         <input type="submit" value="エントリー">
     </form>
+    
 
     <?php
     
@@ -75,14 +76,30 @@
         try{
             $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
-            $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 1, id = ?, thread_id = ?');
-            $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
+            $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
+            $check->execute(array($_POST['entry']));
+            $kakunin = $check->fetch();
+            $ch_thread_id = $kakunin['thread_id'];
+            $ch_name = $kakunin['name'];
+
+            if(isset($ch_name, $ch_thread_id)){
+              echo '既にエントリーされています';
+
+            }else{
+              $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 1, id = ?, thread_id = ?');
+              $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
+              echo 'エントリー完了しました';
+            }
+
             } catch(PDOException $e){
             echo 'エラーが発生しました' . $e->getMessage();
+
         }
     }
 
 ?>
+
+            
 
     <br>
     <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">戻る</a>

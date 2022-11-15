@@ -25,9 +25,9 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY1.html">文化</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY1.html">科学</a></li>
-                  <li><a class="dropdown-item" href="CATEGORY3.html">芸術</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY2.html">文化</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY3.html">科学</a></li>
+                  <li><a class="dropdown-item" href="CATEGORY4.html">芸術</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -68,6 +68,7 @@
         <br>
         <div class="row">
             <div class="col-md-4">
+              暫定結果
   <h1 class="display-4">
    <?php
     try {
@@ -75,7 +76,6 @@
         $stmt->execute(array($hyouji['thread_id']));
     
         foreach ($stmt as $row) {
-            echo '◎';
             echo $row['name'].'<br>';
         }
     
