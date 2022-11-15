@@ -79,10 +79,8 @@
             $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
             $check->execute(array($_POST['entry']));
             $kakunin = $check->fetch();
-            $ch_thread_id = $kakunin['thread_id'];
-            $ch_name = $kakunin['name'];
 
-            if(isset($ch_name, $ch_thread_id)){
+            if(isset($kakunin['name'], $kakunin['thread_id'])){
               echo '既にエントリーされています';
 
             }else{
