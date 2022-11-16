@@ -73,7 +73,7 @@
    <?php
     try {
         $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
-        $stmt->execute(array($hyouji['thread_id']));
+        $stmt->execute(array($thread_id));
     
         foreach ($stmt as $row) {
             echo $row['name'].'<br>';

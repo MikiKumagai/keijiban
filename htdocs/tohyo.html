@@ -84,7 +84,7 @@
               echo '既にエントリーされています';
 
             }else{
-              $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 1, id = ?, thread_id = ?');
+              $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
               $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
               echo 'エントリー完了しました';
             }
