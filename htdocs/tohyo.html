@@ -56,19 +56,83 @@
 
     ?>
 
-1人3つ投票できます
-        <br>
-        <iframe src="http://localhost/tohyo1.html?thread_id=<?php echo $thread_id; ?>" name="hyouzi" width="700" height="450">
-        </iframe>
-        <br/>
 
+    <div class="row">
+      <div class="col-md-6">
+1人3つ投票できます<br>
         <a href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">最新の投票数を表示</a><br>
+        <?php
     
+        try{
+            $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            
+            $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');
+            $Data->execute(array($_REQUEST['thread_id']));
+            $hyouji = $Data->fetch();
+
+            $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
+            $sql->execute(array($_REQUEST['thread_id']));
+            
+            echo '<form action="" method="post">';
+            echo '<div class="chkbx">';
+            foreach ($sql as $row) {
+                echo '<input type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
+                echo '<br>';
+            }
+            echo '</div>';
+            echo '<input type="submit" value="投票">';
+            echo '</form>';
+            } catch(PDOException $e){
+            echo 'エラーが発生しました' . $e->getMessage();
+        }
+
+        if(!empty($_POST['vote'])){
+            try{
+                $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+
+                foreach($_POST['vote'] as $value){
+                  $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
+                  $sql2->execute(array($value));
+                }
+                header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
+            } catch(PDOException $e){
+                  echo 'エラーが発生しました' . $e->getMessage();
+            }
+        }
+
+?>
+
+<script>
+    function click_cb(){
+	var check_count = 0;
+	$(".chkbx input[type='checkbox']").each(function(){
+		if($(this).prop('checked')){
+			check_count = check_count+1;
+		}
+	});
+	if(check_count > 2){
+		$(".chkbx input[type='checkbox']").each(function(){
+			if(!$(this).prop('checked')){
+				$(this).prop('disabled',true);
+			}
+		});
+	}else{
+		$(".chkbx input[type='checkbox']").each(function(){
+			if(!$(this).prop('checked')){
+				$(this).prop('disabled',false);
+			}
+		});
+	}
+	return false;
+}
+</script>
+        <br>
+      </div>
+      <div class="col-md-6">
         <form method="POST" action=""><br>
-        その他：<input type="text" name="entry" size="40"><br>
-        <input type="submit" value="エントリー">
-    </form>
-    
+          その他：<input type="text" name="entry" size="40"><br>
+          <input type="submit" value="エントリー">
+        </form>
 
     <?php
     
@@ -87,6 +151,7 @@
               $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
               $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
               echo 'エントリー完了しました';
+              header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
             }
 
             } catch(PDOException $e){
@@ -96,11 +161,14 @@
     }
 
 ?>
-
+      </div>
+    </div>
             
 
     <br>
-    <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">戻る</a>
+      <div class="row">
+      <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
