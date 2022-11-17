@@ -94,12 +94,9 @@
         </div>
 
            <div class="col-md-8">
-            <div class="row">
-            <div class="col-6">
-              <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">最新のコメントを表示</a>
-            </div>
+             <div class="row">
               <div class="col-6">
-             <div class="dropdown">
+               <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   掲示板に投稿する
                 </button>
@@ -116,7 +113,10 @@
                     </div>
                   </div>
                 </form>
-              </div>
+               </div>
+            </div>
+            <div class="col-6">
+              <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">最新のコメントを表示</a>
             </div>
             </div>
               
@@ -172,7 +172,7 @@
 
         $sql2 = $db->prepare('INSERT INTO BBS(contents, date, thread_id, name) VALUES(:contents, NOW(), :thread_id, :name)');
         $sql2->execute(array(':contents' => $contents, ':thread_id' => $thread_id, ':name'=>$name));
-
+        header("Location: http://localhost/KEIJIBAN.html?thread_id={$_REQUEST['thread_id']}");
         
     } catch(PDOException $e){
         echo 'DB接続エラー' . $e->getMessage();

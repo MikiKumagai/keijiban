@@ -16,7 +16,6 @@
             $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');
             $Data->execute(array($_REQUEST['thread_id']));
             $hyouji = $Data->fetch();
-            $thread_id = $hyouji['thread_id'];
 
             $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
             $sql->execute(array($_REQUEST['thread_id']));
@@ -42,6 +41,7 @@
                   $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
                   $sql2->execute(array($value));
                 }
+                header("Location: http://localhost/tohyo1.html?thread_id={$_REQUEST['thread_id']}");
             } catch(PDOException $e){
                   echo 'エラーが発生しました' . $e->getMessage();
             }
