@@ -87,11 +87,11 @@
                 try{
                       $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
+                      header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
                       foreach($_POST['vote'] as $value){
                         $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
                         $sql2->execute(array($value));
                       }
-                      header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
                  } catch(PDOException $e){
                         echo 'エラーが発生しました' . $e->getMessage();
                  }
@@ -126,10 +126,17 @@
         <br>
       </div>
       <div class="col-md-6">
-        <form method="POST" action=""><br>
-          <input type="text" class="form-control" name="entry" placeholder="その他">
-          <button type="submit" class="btn btn-primary">エントリー</button>
-        </form>
+        <br>
+        <form method="POST" action="">
+          <div class="row">
+            <div class="col-9">
+             <input type="text" class="form-control" name="entry" placeholder="その他">
+            </div>
+            <div class="col-3">
+             <button type="submit" class="btn btn-primary">エントリー</button>
+            </div>
+          </div>
+         </form>
 
             <?php
             
@@ -144,9 +151,9 @@
                         if(isset($kakunin['name'], $kakunin['thread_id'])){
                           echo '既にエントリーされています';
                         }else{
+                          header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
                           $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
                           $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
-                          //header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
                           echo 'エントリー完了しました';
                         }
 
