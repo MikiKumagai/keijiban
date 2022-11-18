@@ -42,60 +42,76 @@
         
         <div class="row">
             <h2 class="text-center">
-    <?php
-     try {
-        $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-        [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
- 
-        } catch(PDOException $e){
-            echo 'エラーが発生しました' . $e->getMessage();
-        }
+              <?php
+              try {
+                  $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
+                  [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
+          
+                  } catch(PDOException $e){
+                      echo 'エラーが発生しました' . $e->getMessage();
+                  }
 
-         $Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
-         $Data->execute(array($_REQUEST['thread_id']));
-         $hyouji = $Data->fetch();
+                  $Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
+                  $Data->execute(array($_REQUEST['thread_id']));
+                  $hyouji = $Data->fetch();
 
-         echo '三大';
-         echo $hyouji['theme'];
-         echo '<br>';
-         echo $hyouji['comment'];
+                  echo '三大';
+                  echo $hyouji['theme'];
+                  echo '<br>';
+                  echo $hyouji['comment'];
 
-         $thread_id = $hyouji['thread_id'];
-    ?>
+                  $thread_id = $hyouji['thread_id'];
+              ?>
             </h2>
         </div>
 
         <br>
+
         <div class="row">
             <div class="col-md-4">
+              <br>
+              <br>
               暫定結果
-  <h1 class="display-4">
-   <?php
-    try {
-        $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
-        $stmt->execute(array($thread_id));
-    
-        foreach ($stmt as $row) {
-            echo $row['name'].'<br>';
-        }
-    
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    
-    } finally {
-        $pdo = null;
-    }
-    
-    ?>
-  </h1>
-    <br>
-    <a href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票はこちら</a><br>
-    <br>
+              <h1 class="display-4 text-center">
+              <?php
+                try {
+                    $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
+                    $stmt->execute(array($thread_id));
+                
+                    foreach ($stmt as $row) {
+                        echo $row['name'].'<br>';
+                    }
+                
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                
+                } finally {
+                    $pdo = null;
+                }
+                
+                ?>
+              </h1>
+              <br>
+              <div class="row">
+                <div class="col-6 text-center">
+                  <a href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票はこちら</a>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+                  class="twitter-share-button"
+                  data-size="large" 
+                  data-text="aaaa" 
+                  data-url="http://localhost/KEIJIBAN.html?thread_id=1" 
+                  data-show-count="false"></a>
+                  <script async src="https://platform.twitter.com/widgets.js" 
+                  charset="utf-8"></script>
+                </div>
+              </div>
         </div>
 
            <div class="col-md-8">
              <div class="row">
-              <div class="col-6">
+              <div class="col-6 text-center">
                <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   掲示板に投稿する
@@ -115,7 +131,7 @@
                 </form>
                </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 text-center">
               <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">最新のコメントを表示</a>
             </div>
             </div>
