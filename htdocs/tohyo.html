@@ -40,7 +40,7 @@
           </div>
         </nav>
     <br/>
-
+<!-- $thread_idを獲得 -->
     <?php    
             try{
                 $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
@@ -56,15 +56,46 @@
 
     ?>
 
-
     <div class="row">
+<!-- チェックボックスでアップデート -->
       <div class="col-md-6">
-        3つ投票できます<br>
+        3つ投票できます<br>            
+
         <?php
     
-            try{
-                $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            if(!empty($_POST['vote'])){
+                try{
+                      foreach($_POST['vote'] as $value){
+                        $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
+                        $sql2->execute(array($value));
+                      }
+                 } catch(PDOException $e){
+                        echo 'エラーが発生しました' . $e->getMessage();
+                 }
+             }
+             
+              if(!empty($_POST['entry'])){
+                  try{
+                      $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
+                      $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
+                      $check->execute(array($_POST['entry']));
+                      $kakunin = $check->fetch();
+
+                        if(isset($kakunin['name'], $kakunin['thread_id'])){
+                          echo '<script>window.confirm("既にエントリーされています")</script>';
+                        }else{
+                          $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
+                          $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
+                          echo '<script>window.confirm("エントリー完了しました")</script>';
+                        }
+
+                  } catch(PDOException $e){
+                      echo 'エラーが発生しました' . $e->getMessage();
+                  }
+                }
+
+            try{
                 $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
                 $sql->execute(array($_REQUEST['thread_id']));
                 
@@ -83,22 +114,9 @@
                 echo 'エラーが発生しました' . $e->getMessage();
             }
 
-            if(!empty($_POST['vote'])){
-                try{
-                      $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
-
-                      header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
-                      foreach($_POST['vote'] as $value){
-                        $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
-                        $sql2->execute(array($value));
-                      }
-                 } catch(PDOException $e){
-                        echo 'エラーが発生しました' . $e->getMessage();
-                 }
-             }
 
           ?>
-
+<!-- JSでチェックボックスの選択数を制限 -->
           <script>
               function click_cb(){
             var check_count = 0;
@@ -125,6 +143,7 @@
           </script>
         <br>
       </div>
+<!-- その他のエントリーをインサート -->
       <div class="col-md-6">
         <br>
         <form method="POST" action="">
@@ -138,30 +157,7 @@
           </div>
          </form>
 
-            <?php
-            
-              if(!empty($_POST['entry'])){
-                  try{
-                      $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
-                      $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
-                      $check->execute(array($_POST['entry']));
-                      $kakunin = $check->fetch();
-
-                        if(isset($kakunin['name'], $kakunin['thread_id'])){
-                          echo '既にエントリーされています';
-                        }else{
-                          header("Location: http://localhost/tohyo.html?thread_id={$_REQUEST['thread_id']}");
-                          $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
-                          $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
-                          echo 'エントリー完了しました';
-                        }
-
-                  } catch(PDOException $e){
-                      echo 'エラーが発生しました' . $e->getMessage();
-                  }
-                }
-            ?>
        </div>
    </div>
     <br>
