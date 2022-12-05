@@ -1,3 +1,7 @@
+<?
+setcookie("cookiename","1")
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -57,12 +61,13 @@
     ?>
 
     <div class="row">
-<!-- チェックボックスでアップデート -->
+<!-- PHP処理 -->
       <div class="col-md-6">
         3つ投票できます<br>            
 
         <?php
     
+//投票
             if(!empty($_POST['vote'])){
                 try{
                       foreach($_POST['vote'] as $value){
@@ -74,7 +79,8 @@
                  }
              }
              
-              if(!empty($_POST['entry'])){
+//確認後エントリー
+             if(!empty($_POST['entry'])){
                   try{
                       $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
 
@@ -95,7 +101,8 @@
                   }
                 }
 
-            try{
+//チェックボックスを表示
+              try{
                 $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
                 $sql->execute(array($_REQUEST['thread_id']));
                 
@@ -163,7 +170,7 @@
     <br>
    <div class="row">
      <div class="col">
-       <a href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
+       <a class="btn btn-secondary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
      </div>
    </div>
 </div>
