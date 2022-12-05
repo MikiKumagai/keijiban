@@ -1,7 +1,3 @@
-<?php
-setcookie('cookie_id',uniqid());
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +66,7 @@ setcookie('cookie_id',uniqid());
             if(!empty($_POST['vote'])){
                 try{
                     $check_cookie = $db->prepare('SELECT * FROM cookie WHERE cookie_id = ? AND thread_id = ?');
-                    $check_cookie->execute(array($_COOKIE['cookie_id'], $thread_id));
+                    $check_cookie->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
                     $kakunin_cookie = $check_cookie->fetch();
                     if(isset($kakunin_cookie['cookie_id'], $kakunin_cookie['thread_id'])){
                       echo '<script>window.confirm("投票は1人1回までです。")</script>';
@@ -80,7 +76,7 @@ setcookie('cookie_id',uniqid());
                         $sql2->execute(array($value));
                       }
                       $sql3 = $db->prepare('INSERT INTO cookie SET cookie_id = ?, thread_id = ?');
-                      $sql3->execute(array($_COOKIE['cookie_id'], $thread_id));
+                      $sql3->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
                     }
                  } catch(PDOException $e){
                         echo 'エラーが発生しました' . $e->getMessage();
