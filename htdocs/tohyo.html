@@ -1,5 +1,5 @@
-<?
-setcookie("cookiename","1")
+<?php
+setcookie('cookie_id',uniqid());
 ?>
 
 <!DOCTYPE html>
@@ -66,19 +66,27 @@ setcookie("cookiename","1")
         3つ投票できます<br>            
 
         <?php
-    
 //投票
             if(!empty($_POST['vote'])){
                 try{
+                    $check_cookie = $db->prepare('SELECT * FROM cookie WHERE cookie_id = ? AND thread_id = ?');
+                    $check_cookie->execute(array($_COOKIE['cookie_id'], $thread_id));
+                    $kakunin_cookie = $check_cookie->fetch();
+                    if(isset($kakunin_cookie['cookie_id'], $kakunin_cookie['thread_id'])){
+                      echo '<script>window.confirm("投票は1人1回までです。")</script>';
+                    }else{
                       foreach($_POST['vote'] as $value){
                         $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
                         $sql2->execute(array($value));
                       }
+                      $sql3 = $db->prepare('INSERT INTO cookie SET cookie_id = ?, thread_id = ?');
+                      $sql3->execute(array($_COOKIE['cookie_id'], $thread_id));
+                    }
                  } catch(PDOException $e){
                         echo 'エラーが発生しました' . $e->getMessage();
                  }
              }
-             
+
 //確認後エントリー
              if(!empty($_POST['entry'])){
                   try{
@@ -170,7 +178,7 @@ setcookie("cookiename","1")
     <br>
    <div class="row">
      <div class="col">
-       <a class="btn btn-secondary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
+       <a class="btn btn-secondary ms-4" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
      </div>
    </div>
 </div>
