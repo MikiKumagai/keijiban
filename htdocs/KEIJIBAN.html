@@ -111,24 +111,18 @@
                 </div>
                 <div class="col-md-6 text-center">
 <!-- ツイートボタン -->
-      <a id="twitter_button" class="btn btn-secondary" onclick="onClickTweet()">この結果をツイート</a>
-
-    <script>
-      //ツイートボタンが押された時の処理
-      function onClickTweet() {
-        //結果をHTMLから取得する
-        var hyouji_json = JSON.parse('<?php echo $hyouji_json; ?>');
-        var theme = hyouji_json.theme;
-        var vote_json = JSON.parse('<?php echo $vote_json; ?>');
-        var name = vote_json;
-        //ツイート内容をセット
-        var tw_contents = ("「三大" + theme + "」は" + name + "です。");
-        var url = encodeURIComponent( document.location );
-        //ツイートボタンのhrefにパラメーターを渡す
-        window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
-      };
-
-    </script>
+                  <a id="twitter_button" class="btn btn-secondary" onclick="onClickTweet()">この結果をツイート</a>
+                  <script>
+                    function onClickTweet() {
+                      var hyouji_json = JSON.parse('<?php echo $hyouji_json; ?>');
+                      var theme = hyouji_json.theme;
+                      var vote_json = JSON.parse('<?php echo $vote_json; ?>');
+                      var name = vote_json;
+                      var tw_contents = ("「三大" + theme + "」は、" + name + "です。");
+                      var url = encodeURIComponent( document.location );
+                      window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
+                    };
+                  </script>
 
                 </div>
             </div>
