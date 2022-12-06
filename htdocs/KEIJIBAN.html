@@ -8,11 +8,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" href="./color.css">
+  </head>
 
 <body style="padding-top: 5rem">
     <div class="container">
-        <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
           <a class="navbar-brand" href="TOP.html">　三大○○</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -60,14 +61,15 @@
                   echo '三大';
                   echo $hyouji['theme'];
                   echo '</h2>';
-                  echo '<h3 class="text-center">';
+                  echo '<h4 class="text-center">';
                   echo '<br>';
-                  echo $hyouji['comment'];
-                  echo '</h3>';
+                  echo nl2br($hyouji['comment']);
+                  echo '</h4>';
 
                   $thread_id = $hyouji['thread_id'];
 
-                  $hyouji_json = json_encode($hyouji);
+                  $theme = $hyouji['theme'];
+                  $theme_json = json_encode($theme);
               ?>
             
         </div>
@@ -107,15 +109,15 @@
 
               <div class="row">
                 <div class="col-md-6 text-center">
-                  <a class="btn btn-secondary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票はこちら</a>
+                  <a class="btn btn-outline-secondary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
                 </div>
                 <div class="col-md-6 text-center">
 <!-- ツイートボタン -->
-                  <a id="twitter_button" class="btn btn-secondary" onclick="onClickTweet()">この結果をツイート</a>
+                  <a id="twitter_button" class="btn btn-outline-secondary" onclick="onClickTweet()">結果をツイート</a>
                   <script>
                     function onClickTweet() {
-                      var hyouji_json = JSON.parse('<?php echo $hyouji_json; ?>');
-                      var theme = hyouji_json.theme;
+                      var theme_json = JSON.parse('<?php echo $theme_json; ?>');
+                      var theme = theme_json;
                       var vote_json = JSON.parse('<?php echo $vote_json; ?>');
                       var name = vote_json;
                       var tw_contents = ("「三大" + theme + "」は、" + name + "です。");
@@ -135,8 +137,8 @@
              <div class="row">
               <div class="col-6 text-center">
                <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                  掲示板に投稿する
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                  投稿する
                 </button>
                 <form class="dropdown-menu p-3" method="POST" action="">
                   <div class="mb-3">
@@ -154,7 +156,7 @@
                </div>
             </div>
             <div class="col-6 text-center">
-              <a class="btn btn-secondary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">最新のコメントを表示</a>
+              <a class="btn btn-outline-secondary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
             </div>
             </div>
               
