@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./color.css">
   </head>
 
-<body style="padding-top: 5rem">
+<body class="bg-light" style="padding-top: 5rem">
     <div class="container">
         <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
           <a class="navbar-brand" href="TOP.html">　三大○○</a>
@@ -41,9 +41,8 @@
           </div>
         </nav>
         
-<!-- スレッドテーマと詳細を取得 -->
         <div class="row">
-            
+<!-- スレッドテーマと詳細を取得 -->
               <?php
               try {
                   $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
@@ -61,8 +60,7 @@
                   echo '三大';
                   echo $hyouji['theme'];
                   echo '</h2>';
-                  echo '<h4 class="text-center text-dark">';
-                  echo '<br>';
+                  echo '<h4 class="text-center text-dark my-4">';
                   echo nl2br($hyouji['comment']);
                   echo '</h4>';
 
@@ -74,15 +72,18 @@
             
         </div>
 
+  <div class="row">
+     <div class="col-md-4 text-dark">
+        <div class="row my-3">
+<!-- 投票ページリンク -->
+           <div class="text-center">
+             <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
+           </div>
 
+         </div>
 
-
-        <br>
-        <div class="row">
   <!-- 現在の結果を取得 -->
-            <div class="col-md-4 mt-2 text-dark">
-              暫定結果
-              <h1 id="name" class="display-4 text-center text-dark bg-light bg-opacity-10">
+              <h1 id="name" class="display-4 text-center bg-success">
               <?php
                 try {
                     $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
@@ -106,15 +107,10 @@
 
                 ?>
               </h1>
-
-              <div class="row">
-                <div class="col-md-6 text-center">
-                  <a class="btn btn-primary mt-1" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
-                </div>
-                <div class="col-md-6 text-center">
 <!-- ツイートボタン -->
-                  <a id="twitter_button" class="btn btn-primary rounded-pill mt-1" onclick="onClickTweet()">結果をツイート</a>
-                  <script>
+           <div class="text-center my-3">
+             <a id="twitter_button" class="btn btn-primary" onclick="onClickTweet()">結果をツイート</a>
+             <script>
                     function onClickTweet() {
                       var theme_json = JSON.parse('<?php echo $theme_json; ?>');
                       var theme = theme_json;
@@ -124,41 +120,36 @@
                       var url = encodeURIComponent( document.location );
                       window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
                     };
-                  </script>
-
-                </div>
-            </div>
-
-              <br>
-              <br>
+             </script>
+           </div>
         </div>
 <!-- 掲示板にインサート、セレクト -->
-           <div class="col-md-8 mt-2">
-             <div class="row">
-              <div class="col-6 text-center">
-               <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                  投稿する
-                </button>
-                <form class="dropdown-menu p-3" method="POST" action="">
-                  <div class="mb-3">
-                    <input type="text" name="name" class="form-control" value="名無し">
+           <div class="col-md-8">
+             <div class="row my-3">
+                <div class="col-6 text-center">
+                  <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                      投稿する
+                    </button>
+                    <form class="dropdown-menu p-3" method="POST" action="">
+                      <div class="mb-3">
+                        <input type="text" name="name" class="form-control" value="名無し">
+                      </div>
+                      <div class="mb-3">
+                        <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
+                      </div>
+                      <div class="mb-1">
+                        <div class="form-check">
+                            <button type="submit" class="btn btn-primary">送信</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="mb-3">
-                    <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
-                  </div>
-                  <div class="mb-1">
-                    <div class="form-check">
-                        <button type="submit" class="btn btn-primary">送信</button>
-                    </div>
-                  </div>
-                </form>
-               </div>
-            </div>
-            <div class="col-6 text-center">
-              <a class="btn btn-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
-            </div>
-            </div>
+                </div>
+                <div class="col-6 text-center">
+                  <a class="btn btn-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
+                </div>
+             </div>
               
             <?php
 
@@ -179,8 +170,8 @@
                 }
             ?>
 
-           <br>
-
+             <div class="row">
+                <div class="col text-dark bg-success">
             <?php
 
             try {
@@ -212,8 +203,9 @@
                 $pdo = null;
             }
         
-        ?>
-
+            ?>
+                </div>
+             </div>
 
            </div>
         </div>
