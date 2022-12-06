@@ -59,7 +59,7 @@
 
     <div class="row">
 <!-- PHP処理 -->
-      <div class="col-md-6">
+      <div class="col-md-6 text-dark">
         3つ投票できます<br>            
 
         <?php
@@ -112,7 +112,7 @@
                 $sql->execute(array($_REQUEST['thread_id']));
                 
                 echo '<form action="" method="post">';
-                echo '<div class="chkbx ms-4 bg-primary bg-opacity-10">';
+                echo '<div class="chkbx ms-4 text-dark bg-light bg-opacity-10">';
                 foreach ($sql as $row) {
                     echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
                     echo '<br>';

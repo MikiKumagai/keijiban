@@ -57,11 +57,11 @@
                   $Data->execute(array($_REQUEST['thread_id']));
                   $hyouji = $Data->fetch();
 
-                  echo '<h2 id="theme" class="text-center">';
+                  echo '<h2 id="theme" class="text-center text-dark">';
                   echo '三大';
                   echo $hyouji['theme'];
                   echo '</h2>';
-                  echo '<h4 class="text-center">';
+                  echo '<h4 class="text-center text-dark">';
                   echo '<br>';
                   echo nl2br($hyouji['comment']);
                   echo '</h4>';
@@ -80,9 +80,9 @@
         <br>
         <div class="row">
   <!-- 現在の結果を取得 -->
-            <div class="col-md-4 mt-5">
+            <div class="col-md-4 mt-2 text-dark">
               暫定結果
-              <h1 id="name" class="display-4 text-center bg-primary bg-opacity-10">
+              <h1 id="name" class="display-4 text-center text-dark bg-light bg-opacity-10">
               <?php
                 try {
                     $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
@@ -109,11 +109,11 @@
 
               <div class="row">
                 <div class="col-md-6 text-center">
-                  <a class="btn btn-outline-secondary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
+                  <a class="btn btn-primary mt-1" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
                 </div>
                 <div class="col-md-6 text-center">
 <!-- ツイートボタン -->
-                  <a id="twitter_button" class="btn btn-outline-secondary" onclick="onClickTweet()">結果をツイート</a>
+                  <a id="twitter_button" class="btn btn-primary rounded-pill mt-1" onclick="onClickTweet()">結果をツイート</a>
                   <script>
                     function onClickTweet() {
                       var theme_json = JSON.parse('<?php echo $theme_json; ?>');
@@ -133,11 +133,11 @@
               <br>
         </div>
 <!-- 掲示板にインサート、セレクト -->
-           <div class="col-md-8">
+           <div class="col-md-8 mt-2">
              <div class="row">
               <div class="col-6 text-center">
                <div class="dropdown">
-                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                   投稿する
                 </button>
                 <form class="dropdown-menu p-3" method="POST" action="">
@@ -156,7 +156,7 @@
                </div>
             </div>
             <div class="col-6 text-center">
-              <a class="btn btn-outline-secondary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
+              <a class="btn btn-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
             </div>
             </div>
               
