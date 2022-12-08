@@ -41,94 +41,16 @@
           </div>
         </nav>
     <br/>
-<!-- $thread_idを獲得 -->
-    <?php    
-            try{
-                $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
-            
-                  $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');
-                  $Data->execute(array($_REQUEST['thread_id']));
-                  $hyouji = $Data->fetch();
-                  $thread_id = $hyouji['thread_id'];
-
-                } catch(PDOException $e){
-                 echo 'エラーが発生しました' . $e->getMessage();
-             }
-
-    ?>
-
     <div class="row">
-<!-- PHP処理 -->
       <div class="col-md-6 text-dark">
         3つ投票できます<br>            
+            <?php
+              require_once("thread_id.php");
+              require_once("to_vo_u.php");
+              require_once("to_vo_i.php");
+              require_once("to_vo_s.php");
+            ?>
 
-        <?php
-//投票
-            if(!empty($_POST['vote'])){
-                try{
-                    $check_user = $db->prepare('SELECT * FROM user WHERE IP = ? AND thread_id = ?');
-                    $check_user->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
-                    $kakunin_user = $check_user->fetch();
-                    if(isset($kakunin_user['IP'], $kakunin_user['thread_id'])){
-                      echo '<script>window.confirm("投票は1人1回までです。")</script>';
-                    }else{
-                      foreach($_POST['vote'] as $value){
-                        $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
-                        $sql2->execute(array($value));
-                      }
-                      $sql3 = $db->prepare('INSERT INTO user SET IP = ?, thread_id = ?');
-                      $sql3->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
-                    }
-                 } catch(PDOException $e){
-                        echo 'エラーが発生しました' . $e->getMessage();
-                 }
-             }
-
-//確認後エントリー
-             if(!empty($_POST['entry'])){
-                  try{
-                      $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
-
-                      $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
-                      $check->execute(array($_POST['entry']));
-                      $kakunin = $check->fetch();
-
-                        if(isset($kakunin['name'], $kakunin['thread_id'])){
-                          echo '<script>window.confirm("既にエントリーされています")</script>';
-                        }else{
-                          $sql = $db->prepare('INSERT INTO vote SET name = ?, count = 0, id = ?, thread_id = ?');
-                          $sql->execute(array($_POST['entry'], uniqid(), $thread_id));
-                          echo '<script>window.confirm("エントリー完了しました")</script>';
-                        }
-
-                  } catch(PDOException $e){
-                      echo 'エラーが発生しました' . $e->getMessage();
-                  }
-                }
-
-//チェックボックスを表示
-              try{
-                $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
-                $sql->execute(array($_REQUEST['thread_id']));
-                
-                echo '<form action="" method="post">';
-                echo '<div class="chkbx m-4 p-3 text-dark bg-success">';
-                foreach ($sql as $row) {
-                    echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
-                    echo '<br>';
-                }
-                echo '</div>';
-                echo '<div class="float-end me-4">';
-                echo '<button type="submit" class="btn btn-primary">投票</button>';
-                echo '</div>';
-                echo '</form>';
-                } catch(PDOException $e){
-                echo 'エラーが発生しました' . $e->getMessage();
-            }
-
-
-          ?>
-<!-- JSでチェックボックスの選択数を制限 -->
           <script>
               function click_cb(){
             var check_count = 0;
@@ -153,9 +75,8 @@
             return false;
           }
           </script>
-        <br>
       </div>
-<!-- その他のエントリーをインサート -->
+      
       <div class="col-md-6">
         <br>
         <form method="POST" action="">
@@ -168,7 +89,6 @@
             </div>
           </div>
          </form>
-
 
        </div>
    </div>

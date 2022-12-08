@@ -45,30 +45,8 @@
           <div class="col">
 <!-- スレッドテーマと詳細を取得 -->
               <?php
-              try {
-                  $pdo = new PDO( 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-                  [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC] );
-          
-                  } catch(PDOException $e){
-                      echo 'エラーが発生しました' . $e->getMessage();
-                  }
-
-                  $Data = $pdo->prepare('SELECT * FROM plan WHERE thread_id=?');
-                  $Data->execute(array($_REQUEST['thread_id']));
-                  $hyouji = $Data->fetch();
-
-                  echo '<h2 class="text-center text-dark">';
-                  echo '三大';
-                  echo $hyouji['theme'];
-                  echo '</h2>';
-                  echo '<h4 class="text-center text-dark p-4">';
-                  echo nl2br($hyouji['comment']);
-                  echo '</h4>';
-
-                  $thread_id = $hyouji['thread_id'];
-
-                  $theme = $hyouji['theme'];
-                  $theme_json = json_encode($theme);
+              require_once("thread_id.php");    
+              require_once("ke_pl_s.php");
               ?>
            </div>
         </div>
@@ -82,27 +60,8 @@
   <!-- 現在の結果を取得 -->
               <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
               <?php
-                try {
-                    $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
-                    $stmt->execute(array($thread_id));
-                  
-                    $vote[] = [];
-                    foreach ($stmt as $row) {
-                        echo $row['name'].'<br>';
-                        $vote[] = $row['name'];
-                    }
-                
-                } catch (PDOException $e) {
-                    echo $e->getMessage();
-                
-                } finally {
-                    $pdo = null;
-                }
-                
-
-                $vote_json = json_encode($vote);
-
-                ?>
+                require_once("ke_vo_s.php");
+              ?>
               </h1>
 <!-- ツイート -->
            <div class="m-3 p-3 bg-success border border-primary">
@@ -110,6 +69,11 @@
               <div class="text-end px-4">
                 <button class="btn btn-primary  rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
               </div>
+              <?php
+                $theme = $hyouji['theme'];
+                $theme_json = json_encode($theme);
+                $vote_json = json_encode($vote);
+              ?>
               <script>
                     function onClickTweet() {
                       var theme_json = JSON.parse('<?php echo $theme_json; ?>');
@@ -130,7 +94,7 @@
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                       投稿
                     </button>
-                    <form class="dropdown-menu p-3" method="POST" action="">
+                    <form class="dropdown-menu p-3" method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
                       <div class="mb-3">
                         <input type="text" name="name" class="form-control" value="名無し">
                       </div>
@@ -144,61 +108,13 @@
                       </div>
                     </form>
                   </div>
-              
-            <?php
-
-                if(!empty($_POST['contents'])){
-                try{
-                  $pdo = new PDO(
-                    'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-                    [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-
-                  $sql2 = $pdo->prepare('INSERT INTO BBS(contents, date, thread_id, name) VALUES(:contents, NOW(), :thread_id, :name)');
-                  $sql2->execute(array(':contents' => $_POST['contents'], ':thread_id' => $thread_id, ':name'=>$_POST['name']));
-
-                  $_POST['contents'] = NULL;
-
-                } catch(PDOException $e){
-                  echo 'DB接続エラー' . $e->getMessage();
-                }
-                }
-            ?>
 
                 <div class="text-dark bg-success m-3 p-3 border border-primary">
                   <div class="text-end">
                   <a class="btn btn-outline-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a><br>
                   </div>
             <?php
-
-            try {
-                $pdo = new PDO(
-                    'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-                    [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-            
-                $stmt = $pdo->prepare('SELECT * FROM bbs WHERE thread_id=? ORDER BY date DESC');
-                $stmt->execute(array($_REQUEST['thread_id']));
-                $row_count = $stmt->rowCount();
-        
-                foreach ($stmt as $hyouji) {
-                    echo $row_count, ' ';
-                    $row_count -= 1;
-                    echo $hyouji['name'];
-                    echo '<br>';
-                    echo nl2br($hyouji['contents']);
-                    echo '<br>';
-                    echo '<p style="text-align:right">';
-                    echo $hyouji['date'];
-                    echo '</p>';
-                    echo '<hr>';
-                }
-            
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-            
-            } finally {
-                $pdo = null;
-            }
-        
+              require_once("ke_bb_s.php");
             ?>
                 </div>
 
