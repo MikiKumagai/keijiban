@@ -42,6 +42,7 @@
         </nav>
         
         <div class="row">
+          <div class="col">
 <!-- スレッドテーマと詳細を取得 -->
               <?php
               try {
@@ -56,11 +57,11 @@
                   $Data->execute(array($_REQUEST['thread_id']));
                   $hyouji = $Data->fetch();
 
-                  echo '<h2 id="theme" class="text-center text-dark">';
+                  echo '<h2 class="text-center text-dark">';
                   echo '三大';
                   echo $hyouji['theme'];
                   echo '</h2>';
-                  echo '<h4 class="text-center text-dark my-4">';
+                  echo '<h4 class="text-center text-dark p-4">';
                   echo nl2br($hyouji['comment']);
                   echo '</h4>';
 
@@ -69,21 +70,17 @@
                   $theme = $hyouji['theme'];
                   $theme_json = json_encode($theme);
               ?>
-            
+           </div>
         </div>
 
   <div class="row">
      <div class="col-md-4 text-dark">
-        <div class="row my-3">
 <!-- 投票ページリンク -->
-           <div class="text-center">
+           <div class="col d-grid gap-2 text-center m-3">
              <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
            </div>
-
-         </div>
-
   <!-- 現在の結果を取得 -->
-              <h1 id="name" class="display-4 text-center bg-success">
+              <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
               <?php
                 try {
                     $stmt = $pdo->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
@@ -107,10 +104,13 @@
 
                 ?>
               </h1>
-<!-- ツイートボタン -->
-           <div class="text-center my-3">
-             <a id="twitter_button" class="btn btn-primary" onclick="onClickTweet()">結果をツイート</a>
-             <script>
+<!-- ツイート -->
+           <div class="m-3 p-3 bg-success border border-primary">
+              <p class="text-center text-dark">この結果をツイートして、もっと議論を盛り上げましょう！</p>
+              <div class="text-end px-4">
+                <button class="btn btn-primary  rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
+              </div>
+              <script>
                     function onClickTweet() {
                       var theme_json = JSON.parse('<?php echo $theme_json; ?>');
                       var theme = theme_json;
@@ -120,16 +120,15 @@
                       var url = encodeURIComponent( document.location );
                       window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
                     };
-             </script>
+              </script>
            </div>
         </div>
+        
 <!-- 掲示板にインサート、セレクト -->
            <div class="col-md-8">
-             <div class="row my-3">
-                <div class="col-6 text-center">
-                  <div class="dropdown">
+                  <div class="d-grid gap-2 dropdown m-3">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                      投稿する
+                      投稿
                     </button>
                     <form class="dropdown-menu p-3" method="POST" action="">
                       <div class="mb-3">
@@ -145,11 +144,6 @@
                       </div>
                     </form>
                   </div>
-                </div>
-                <div class="col-6 text-center">
-                  <a class="btn btn-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a>
-                </div>
-             </div>
               
             <?php
 
@@ -170,8 +164,10 @@
                 }
             ?>
 
-             <div class="row">
-                <div class="col text-dark bg-success">
+                <div class="text-dark bg-success m-3 p-3 border border-primary">
+                  <div class="text-end">
+                  <a class="btn btn-outline-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a><br>
+                  </div>
             <?php
 
             try {
@@ -205,7 +201,6 @@
         
             ?>
                 </div>
-             </div>
 
            </div>
         </div>
