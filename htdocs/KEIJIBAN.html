@@ -175,24 +175,32 @@
          </div>
         
         <div class="col-md-8">
-          <div class="d-grid gap-2 dropdown m-3">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                  投稿
-              </button>
-              <form class="dropdown-menu p-3" method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
-                <div class="mb-3">
-                  <input type="text" name="name" class="form-control" value="名無し">
-                </div>
-                <div class="mb-3">
-                  <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
-                </div>
-                <div class="mb-1">
-                  <div class="form-check">
-                    <button type="submit" class="btn btn-primary">送信</button>
-                  </div>
-                </div>
-              </form>
+          <div class="d-grid gap-2 m-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment">投稿</button>
           </div>
+          <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <p class="modal-title" id="exampleModalLabel">tytle</p>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
+                    <div class="p-1">
+                      <input type="text" name="name" class="form-control" value="名無し">
+                    </div>
+                    <div class="p-1">
+                      <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
+                    </div>
+                    <div class="p-1 text-end">
+                      <button type="submit" class="btn btn-primary">送信</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="bg-success m-3 p-3 border border-primary">
             <div class="text-end">
               <a class="btn btn-outline-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a><br>
