@@ -17,13 +17,13 @@
     $sql->execute(array($_REQUEST['thread_id']));
     
     echo '<form action="" method="post">';
-    echo '<div class="chkbx m-4 p-3 text-dark bg-success">';
+    echo '<div class="chkbx">';
     foreach ($sql as $row) {
         echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
         echo '<br>';
     }
     echo '</div>';
-    echo '<div class="float-end me-4">';
+    echo '<div class="text-end">';
     echo '<button type="submit" class="btn btn-primary">投票</button>';
     echo '</div>';
     echo '</form>';
