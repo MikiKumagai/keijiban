@@ -12,14 +12,13 @@
   </head>
 
 <body class="bg-light" style="padding-top: 5rem">
-    <div class="container">
-        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-          <a class="navbar-brand" href="TOP.html">　三大○○</a>
+
+  <div class="container">
+
+      <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand ps-4" href="TOP.html">三大○○</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="GAIYO.html">はじめに</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   カテゴリ
@@ -39,35 +38,30 @@
               </li>
             </ul>
           </div>
-        </nav>
+      </nav>
         
-        <div class="row">
+      <div class="row">
           <div class="col">
-<!-- スレッドテーマと詳細を取得 -->
               <?php
               require_once("thread_id.php");    
               require_once("ke_pl_s.php");
               ?>
            </div>
-        </div>
+      </div>
 
-  <div class="row">
-     <div class="col-md-4 text-dark">
-<!-- 投票ページリンク -->
-           <div class="col d-grid gap-2 text-center m-3">
-             <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
-           </div>
-  <!-- 現在の結果を取得 -->
-              <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
-              <?php
-                require_once("ke_vo_s.php");
-              ?>
-              </h1>
-<!-- ツイート -->
+      <div class="row">
+
+         <div class="col-md-4">
+            <div class="d-grid gap-2 m-3">
+              <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
+            </div>
+            <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
+              <?php require_once("ke_vo_s.php"); ?>
+            </h1>
            <div class="m-3 p-3 bg-success border border-primary">
               <p class="text-center text-dark">この結果をツイートして、もっと議論を盛り上げましょう！</p>
               <div class="text-end px-4">
-                <button class="btn btn-primary  rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
+                <button class="btn btn-primary rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
               </div>
               <?php
                 $theme = $hyouji['theme'];
@@ -75,53 +69,54 @@
                 $vote_json = json_encode($vote);
               ?>
               <script>
-                    function onClickTweet() {
-                      var theme_json = JSON.parse('<?php echo $theme_json; ?>');
-                      var theme = theme_json;
-                      var vote_json = JSON.parse('<?php echo $vote_json; ?>');
-                      var name = vote_json;
-                      var tw_contents = ("「三大" + theme + "」は、" + name + "です。");
-                      var url = encodeURIComponent( document.location );
-                      window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
-                    };
+                function onClickTweet() {
+                  var theme_json = JSON.parse('<?php echo $theme_json; ?>');
+                  var theme = theme_json;
+                  var vote_json = JSON.parse('<?php echo $vote_json; ?>');
+                  var name = vote_json;
+                  var tw_contents = ("「三大" + theme + "」は、" + name + "です。");
+                  var url = encodeURIComponent( document.location );
+                  window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
+                };
               </script>
            </div>
+         </div>
+        
+        <div class="col-md-8">
+          <div class="d-grid gap-2 dropdown m-3">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                  投稿
+              </button>
+              <form class="dropdown-menu p-3" method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
+                <div class="mb-3">
+                  <input type="text" name="name" class="form-control" value="名無し">
+                </div>
+                <div class="mb-3">
+                  <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
+                </div>
+                <div class="mb-1">
+                  <div class="form-check">
+                    <button type="submit" class="btn btn-primary">送信</button>
+                  </div>
+                </div>
+              </form>
+          </div>
+          <div class="bg-success m-3 p-3 border border-primary">
+            <div class="text-end">
+              <a class="btn btn-outline-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a><br>
+            </div>
+            <div class="text-dark">
+              <?php
+                require_once("ke_bb_s.php");
+              ?>
+            </div>
+          </div>
         </div>
         
-<!-- 掲示板にインサート、セレクト -->
-           <div class="col-md-8">
-                  <div class="d-grid gap-2 dropdown m-3">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                      投稿
-                    </button>
-                    <form class="dropdown-menu p-3" method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
-                      <div class="mb-3">
-                        <input type="text" name="name" class="form-control" value="名無し">
-                      </div>
-                      <div class="mb-3">
-                        <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力"></textarea>
-                      </div>
-                      <div class="mb-1">
-                        <div class="form-check">
-                            <button type="submit" class="btn btn-primary">送信</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+      </div>
+  </div>
 
-                <div class="text-dark bg-success m-3 p-3 border border-primary">
-                  <div class="text-end">
-                  <a class="btn btn-outline-primary" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">更新</a><br>
-                  </div>
-            <?php
-              require_once("ke_bb_s.php");
-            ?>
-                </div>
 
-           </div>
-        </div>
-
-    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
         crossorigin="anonymous"></script>

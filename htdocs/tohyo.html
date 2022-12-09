@@ -12,14 +12,11 @@
 </head>
 
 <body class="bg-light" style="padding-top: 5rem">
-   <div class="container">
+  <div class="container">
         <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-          <a class="navbar-brand" href="TOP.html">　三大○○</a>
+          <a class="navbar-brand ps-4" href="TOP.html">三大○○</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="GAIYO.html">はじめに</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   カテゴリ
@@ -41,9 +38,10 @@
           </div>
         </nav>
     <br/>
+
     <div class="row">
-      <div class="col-md-6 text-dark">
-        3つ投票できます<br>            
+      <div class="col-md-6">
+        <p class="text-dark">3つ投票できます</p>        
             <?php
               require_once("thread_id.php");
               require_once("to_vo_u.php");
@@ -77,30 +75,28 @@
           </script>
       </div>
       
-      <div class="col-md-6">
-        <br>
-        <form method="POST" action="">
-          <div class="row">
-            <div class="col-9">
-             <input type="text" class="form-control" name="entry" placeholder="その他">
-            </div>
-            <div class="col-3">
-             <button type="submit" class="btn btn-primary">エントリー</button>
-            </div>
-          </div>
-         </form>
-
-       </div>
-   </div>
-    <br>
+      <div class="col-md-6 my-5">
+          <form method="POST" action="">
+              <div class="row">
+                <div class="col-9">
+                <input type="text" class="form-control" name="entry" placeholder="その他">
+                </div>
+                <div class="col-3">
+                <button type="submit" class="btn btn-primary">エントリー</button>
+                </div>
+              </div>
+          </form>
+      </div>
+    </div>
+    
    <div class="row">
      <div class="col">
        <a class="btn btn-secondary ms-4" href="keijiban.html?thread_id=<?php echo $thread_id; ?>">掲示板に戻る</a>
      </div>
    </div>
-</div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
     crossorigin="anonymous"></script>
 
