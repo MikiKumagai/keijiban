@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./color.css">
     </head>
-<body>
+<body class='bg-light'>
 <?php  
 
 require_once("thread_id.php");

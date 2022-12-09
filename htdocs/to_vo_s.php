@@ -19,7 +19,9 @@
     echo '<form action="" method="post">';
     echo '<div class="chkbx">';
     foreach ($sql as $row) {
-        echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
+        echo '<label>';
+        echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.' '.$row['name'].' '.$row['count'].'票';
+        echo '</label>';
         echo '<br>';
     }
     echo '</div>';
