@@ -17,7 +17,9 @@
                 [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
             );
 
-            $stmt = 'select * from plan WHERE category=1 order by thread_id DESC';
+            require_once('category.php');
+
+            $stmt = "select * from plan WHERE category={$category} order by thread_id DESC";
             $pdo -> query($stmt);
     
             foreach ($pdo -> query($stmt) as $row) {
