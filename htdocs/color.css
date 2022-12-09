@@ -682,3 +682,14 @@ button.bg-light:focus {
 a.text-light:hover, a.text-light:focus {
     color: #ddcac8 !important;
 }
+
+
+/* link */
+#active {
+	color: #1B718A;	
+    text-decoration: none;
+}
+
+#active:hover {
+	color: #F1931B;
+}
