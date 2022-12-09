@@ -51,21 +51,21 @@
                     <form method="POST" action="plan-insert.php">
                       <div class="row p-2">
                         <div class="col-2">
-                          <label class="form-label">三大</label>
+                          <label>三大</label>
                         </div>
                         <div class="col-10">
                           <input class="form-control" type="text" name="theme" size="30">
                         </div>
                       </div>
                       <div class="p-2">
-                        カテゴリー:
-                        <input class="form-check-input" type="radio" name="category" value="1">生活 
-                        <input class="form-check-input" type="radio" name="category" value="2">文化 
-                        <input class="form-check-input" type="radio" name="category" value="3">科学 
-                        <input class="form-check-input" type="radio" name="category" value="4">芸術
+                        <label>カテゴリー：</label>
+                        <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="1">生活</label> 
+                        <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="2">文化</label> 
+                        <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="3">科学</label> 
+                        <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="4">芸術</label>
                       </div>                    
                       <div class="p-2">
-                        テーマの説明
+                        <label>テーマの説明</label>
                         <textarea class="form-control" name="comment" rows="4" cols="45"></textarea>
                       </div>
                       <div class="text-end p-2">
@@ -76,33 +76,12 @@
               </div>
             </div>
           </div>
-          
+
     <div class="row">
-      <div class="col">
-       <?php
-
-        try {
-            $pdo = new PDO(
-                'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-                [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-            );
-            $sql = "SELECT * FROM plan ORDER BY thread_id DESC";
-            $pdo -> query($sql);
-
-            foreach ($pdo -> query($sql) as $row) {
-              echo '<br>';
-              echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">三大{$row['theme']} {$row['date']}</a>";
-              echo '<br>';
-            }
-
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        
-        } finally {
-            $pdo = null;
-        }
-    
-        ?>
+      <div class="col bg-success m-5 p-3">        
+          <?php
+            require_once('to_pl_s.php');      
+          ?>
       </div>
     </div>
   </div>
