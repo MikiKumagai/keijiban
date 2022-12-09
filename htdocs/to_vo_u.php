@@ -23,6 +23,7 @@
           }
           $sql3 = $db->prepare('INSERT INTO user SET IP = ?, thread_id = ?');
           $sql3->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
+          echo '<script>window.confirm("投票完了しました。")</script>';
         }
      } catch(PDOException $e){
             echo 'エラーが発生しました' . $e->getMessage();

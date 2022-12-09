@@ -53,8 +53,26 @@
 
          <div class="col-md-4">
             <div class="d-grid gap-2 m-3">
-              <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a>
+              <!-- <a class="btn btn-primary" href="http://localhost/tohyo.html?thread_id=<?php echo $thread_id; ?>">投票</a> -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">投票</button>
             </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel">1人3つ投票できます</p>
+      </div>
+      <div class="modal-body">
+        <?php
+        require_once("to_vo_u.php");
+        require_once("to_vo_i.php");
+        require_once("to_vo_s.php");
+      ?>
+      </div>
+    </div>
+  </div>
+</div>
+
             <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
               <?php require_once("ke_vo_s.php"); ?>
             </h1>
@@ -115,6 +133,9 @@
         
       </div>
   </div>
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 

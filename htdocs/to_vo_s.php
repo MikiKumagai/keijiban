@@ -16,7 +16,7 @@
     $sql = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC');
     $sql->execute(array($_REQUEST['thread_id']));
     
-    echo '<form action="vote-update.php?thread_id={$thread_id}" method="post">';
+    echo '<form action="" method="post">';
     echo '<div class="chkbx m-4 p-3 text-dark bg-success">';
     foreach ($sql as $row) {
         echo '<input class="form-check-input" type="checkbox" name="vote[]" value="'.$row['id'].'" onclick="click_cb();">'.$row['name'].' '.$row['count'].'票';
