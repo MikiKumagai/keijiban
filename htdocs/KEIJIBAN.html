@@ -60,7 +60,7 @@
                         </div>
                       </div>
                       <div class="p-2">
-                        カテゴリー:
+                        カテゴリー：
                         <input class="form-check-input" type="radio" name="category" value="1">生活 
                         <input class="form-check-input" type="radio" name="category" value="2">文化 
                         <input class="form-check-input" type="radio" name="category" value="3">科学 
@@ -122,6 +122,30 @@
                 </div>
               </div>
             </div>
+                      <script>
+                        function click_cb(){
+                      var check_count = 0;
+                      $(".chkbx input[type='checkbox']").each(function(){
+                        if($(this).prop('checked')){
+                          check_count = check_count+1;
+                        }
+                      });
+                      if(check_count > 2){
+                        $(".chkbx input[type='checkbox']").each(function(){
+                          if(!$(this).prop('checked')){
+                            $(this).prop('disabled',true);
+                          }
+                        });
+                      }else{
+                        $(".chkbx input[type='checkbox']").each(function(){
+                          if(!$(this).prop('checked')){
+                            $(this).prop('disabled',false);
+                          }
+                        });
+                      }
+                      return false;
+                    }
+                    </script>
 
             <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
               <?php require_once("ke_vo_s.php"); ?>
