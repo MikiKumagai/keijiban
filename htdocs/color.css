@@ -693,3 +693,14 @@ a.text-light:hover, a.text-light:focus {
 #active:hover {
 	color: #F1931B;
 }
+
+/* button */
+#to {
+    background-color: #1B718A;
+    color: #fff;
+    border: none;
+}
+#to:hover {
+    background-color: #F1931B;
+    border: none;
+}

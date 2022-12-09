@@ -23,7 +23,7 @@
             $row_count -= 1;
             echo $hyouji['name'];
             echo '</font>';
-            echo '<p class="px-2"><font size=4>';
+            echo '<p class="px-4"><font size=4>';
             echo nl2br($hyouji['contents']);
             echo '</font></p>';
             echo '<p style="text-align:right"><font size=2>';

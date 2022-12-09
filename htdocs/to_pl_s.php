@@ -21,8 +21,10 @@
 
             foreach ($pdo -> query($sql) as $row) {
             echo "<a id=active href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">";
-            echo '<font size=4>';
+            echo '<p class="px-4"><font size=5>';
             echo "三大{$row['theme']}";
+            echo '</font>';
+            echo '<p class="px-4" style="text-align:right"><font size=2>';
             echo " {$row['active']} 更新";
             echo '</font>';
             echo '</a>';
