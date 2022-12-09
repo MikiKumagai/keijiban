@@ -9,32 +9,74 @@
     <link rel="stylesheet" href="./color.css">
   </head>
 
-<body class="bg-light" style="padding-top: 5rem">
-  <div class="container">
-      <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand ps-4" href="TOP.html">三大○○</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                カテゴリ
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
-                <li><a class="dropdown-item" href="CATEGORY2.html">文化</a></li>
-                <li><a class="dropdown-item" href="CATEGORY3.html">科学</a></li>
-                <li><a class="dropdown-item" href="CATEGORY4.html">芸術</a></li>
+  <body class="bg-light" style="padding-top: 5rem">
+    <div class="container">
+          <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand ps-4" href="TOP.html">三大○○</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    カテゴリ
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
+                    <li><a class="dropdown-item" href="CATEGORY2.html">文化</a></li>
+                    <li><a class="dropdown-item" href="CATEGORY3.html">科学</a></li>
+                    <li><a class="dropdown-item" href="CATEGORY4.html">芸術</a></li>
+                  </ul>
+                </li>
+  
+                <li class="nav-item">
+                  <a class="nav-link" href="#newthread" data-toggle="modal" data-target="#newthread">
+                    新規スレッド作成
+                  </a>
+                </li>
+   
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="https://twitter.com/____kmmk">twitter</a>
+                </li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="KIKAKU.html">新規スレッド作成</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://twitter.com/____kmmk">twitter</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+            </div>
+          </nav>
+  
+          <div class="modal fade" id="newthread" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <p class="modal-title">スレッド設定</p>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="plan-insert.php">
+                      <div class="row p-2">
+                        <div class="col-2">
+                          <label class="form-label">三大</label>
+                        </div>
+                        <div class="col-10">
+                          <input class="form-control" type="text" name="theme" size="30">
+                        </div>
+                      </div>
+                      <div class="p-2">
+                        カテゴリー:
+                        <input class="form-check-input" type="radio" name="category" value="1">生活 
+                        <input class="form-check-input" type="radio" name="category" value="2">文化 
+                        <input class="form-check-input" type="radio" name="category" value="3">科学 
+                        <input class="form-check-input" type="radio" name="category" value="4">芸術
+                      </div>                    
+                      <div class="p-2">
+                        テーマの説明
+                        <textarea class="form-control" name="comment" rows="4" cols="45"></textarea>
+                      </div>
+                      <div class="text-end p-2">
+                        <button type="submit" class="btn btn-primary">送信</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     <div class="row">
       <div class="col">
        <?php
