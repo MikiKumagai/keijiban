@@ -16,13 +16,17 @@
                 'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
                 [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
             );
-            $sql = "SELECT * FROM plan ORDER BY thread_id DESC";
+            $sql = "SELECT * FROM plan ORDER BY active DESC";
             $pdo -> query($sql);
 
             foreach ($pdo -> query($sql) as $row) {
-            echo '<h4 class="lh-lg">';
-            echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">三大{$row['theme']}</a>";
-            echo '</h4>';
+            echo "<a id=active href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">";
+            echo '<font size=4>';
+            echo "三大{$row['theme']}";
+            echo " {$row['active']} 更新";
+            echo '</font>';
+            echo '</a>';
+            echo '<hr>';
             }
 
         } catch (PDOException $e) {

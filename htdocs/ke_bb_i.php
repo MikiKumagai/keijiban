@@ -17,6 +17,9 @@ require_once("thread_id.php");
             $sql = $db->prepare('INSERT INTO BBS(contents, date, thread_id, name) VALUES(:contents, NOW(), :thread_id, :name)');
             $sql->execute(array(':contents' => $_POST['contents'], ':thread_id' => $thread_id, ':name'=>$_POST['name']));
 
+            $sql2 = $db->prepare('UPDATE plan SET active=NOW() WHERE thread_id = ?');
+            $sql2->execute(array($thread_id));
+
             $_POST['contents'] = NULL;
             
         } catch(PDOException $e){
