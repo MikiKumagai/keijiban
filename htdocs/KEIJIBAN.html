@@ -109,10 +109,10 @@
                       ?>
                       <form method="POST" action="">
                         <div class="row pt-3">
-                          <div class="col-9">
+                          <div class="col-8">
                             <input type="text" class="form-control" name="entry" placeholder="その他">
                           </div>
-                          <div class="col-3 text-end">
+                          <div class="col-4 text-end">
                            <button type="submit" class="btn btn-primary">エントリー</button>
                           </div>
                         </div>
@@ -151,7 +151,9 @@
               <?php require_once("ke_vo_s.php"); ?>
             </h1>
            <div class="m-3 p-3 bg-success border border-primary">
-              <p class="text-center text-dark">この結果をツイートして、もっと議論を盛り上げましょう！</p>
+              <p class="text-center text-dark">
+                この結果をツイートして、もっと議論を盛り上げよう！
+              </p>
               <div class="text-end px-4">
                 <button class="btn btn-primary rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
               </div>
@@ -182,7 +184,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <p class="modal-title" id="exampleModalLabel">tytle</p>
+                  <p class="modal-title" id="exampleModalLabel">投稿</p>
                 </div>
                 <div class="modal-body">
                   <form method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">

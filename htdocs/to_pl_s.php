@@ -20,9 +20,9 @@
             $pdo -> query($sql);
 
             foreach ($pdo -> query($sql) as $row) {
-            echo '<p class="text-dark lh-base">';
-            echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">三大{$row['theme']} {$row['date']}</a>";
-            echo '</p>';
+            echo '<h4 class="lh-lg">';
+            echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">三大{$row['theme']}</a>";
+            echo '</h4>';
             }
 
         } catch (PDOException $e) {

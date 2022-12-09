@@ -18,15 +18,17 @@
         $row_count = $stmt->rowCount();
 
         foreach ($stmt as $hyouji) {
+            echo '<font size=2>';
             echo $row_count, ' ';
             $row_count -= 1;
             echo $hyouji['name'];
-            echo '<br>';
+            echo '</font>';
+            echo '<p class="px-2"><font size=4>';
             echo nl2br($hyouji['contents']);
-            echo '<br>';
-            echo '<p style="text-align:right">';
+            echo '</font></p>';
+            echo '<p style="text-align:right"><font size=2>';
             echo $hyouji['date'];
-            echo '</p>';
+            echo '</font></p>';
             echo '<hr>';
         }
     
