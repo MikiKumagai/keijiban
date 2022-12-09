@@ -2,39 +2,103 @@
 <html>
 
 <head>
-    <title>
-    カテゴリー
-    </title>
+    <title>三大○○</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./color.css">
 </head>
 
-<body>
-   
-    <?php
+<body class="bg-light" style="padding-top: 5rem">
+    <div class="container">
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand ps-4" href="TOP.html">三大○○</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        カテゴリ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="CATEGORY1.html">生活</a></li>
+                            <li><a class="dropdown-item" href="CATEGORY2.html">文化</a></li>
+                            <li><a class="dropdown-item" href="CATEGORY3.html">科学</a></li>
+                            <li><a class="dropdown-item" href="CATEGORY4.html">芸術</a></li>
+                        </ul>
+                    </li>
 
-        try {
-            $pdo = new PDO(
-                'mysql:host=localhost;dbname=ranking;','kmmk','uwfyzcyr',
-                [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
-            );
+                    <li class="nav-item">
+                        <a class="nav-link" href="#newthread" data-toggle="modal" data-target="#newthread">
+                        新規スレッド作成
+                        </a>
+                    </li>
 
-            $stmt = 'select * from plan WHERE category=1 order by thread_id DESC';
-            $pdo -> query($stmt);
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://twitter.com/____kmmk">twitter</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="modal fade" id="newthread" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title">スレッド設定</p>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="plan-insert.php">
+                            <div class="row p-2">
+                            <div class="col-2">
+                                <label>三大</label>
+                            </div>
+                            <div class="col-10">
+                                <input class="form-control" type="text" name="theme" size="30">
+                            </div>
+                            </div>
+                            <div class="p-2">
+                                <label>カテゴリー：</label>
+                                <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="1">生活</label> 
+                                <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="2">文化</label> 
+                                <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="3">科学</label> 
+                                <label class="pe-1"><input class="form-check-input" type="radio" name="category" value="4">芸術</label>
+                            </div>                    
+                            <div class="p-2">
+                                <label>テーマの説明</label>
+                                <textarea class="form-control" name="comment" rows="4" cols="45"></textarea>
+                            </div>
+                            <div class="text-end p-2">
+                            <button type="submit" class="btn btn-primary">作成</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col bg-success border border-primary m-5 p-5">  
+                <?php
+                    require_once('ca_pl_s.php');
+                ?>     
+            </div>
+        </div>
+    </div>
     
-            foreach ($pdo -> query($stmt) as $row) {
-                echo "<a href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">{$row['theme']}</a>";
-                echo '<br>';
-              }
-        
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        
-        } finally {
-            $pdo = null;
-        }
-    
-    ?> 
-    
-    <a href="TOP.html">戻る</a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
+  crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+  crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>
