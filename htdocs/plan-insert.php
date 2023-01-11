@@ -15,7 +15,9 @@
 <?php
     
         try{
-            $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+            $db = new PDO(
+                'mysql:host=172.17.0.3;dbname=ranking;','apache_webserver','uwfyzcyr',
+                        );
             
             $theme = $_POST['theme'];
             $category = $_POST['category'];
@@ -35,7 +37,7 @@
 ?>
 <div class='text-center m-5'>
     スレッドが作成されました<br>
-    <a crass="btn btn-primary" href="keijiban.html?thread_id=<?php echo $count; ?>">作成したページを表示する</a>
+    <a crass="btn btn-primary" href="KEIJIBAN.html?thread_id=<?php echo $count; ?>">作成したページを表示する</a>
 </div>
 
 </body>

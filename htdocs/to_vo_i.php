@@ -14,7 +14,7 @@
 
    if(!empty($_POST['entry'])){
     try{
-        $db = new PDO('mysql:dbname=ranking;host=localhost;charset=utf8','kmmk','uwfyzcyr');
+        $db = new PDO('mysql:host=172.17.0.3;dbname=ranking;','apache_webserver','uwfyzcyr');
 
         $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
         $check->execute(array($_POST['entry']));
