@@ -1,5 +1,7 @@
 FROM php:apache
 
+# COPY ./conf/apache2.conf /etc/apache2/apache2.conf
+
 RUN apt update && \
     apt install unzip
 
