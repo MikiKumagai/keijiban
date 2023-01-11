@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   keijiban-php:
-    image: php:8.1.7-apache
     build:
       context: .
       dockerfile: Dockerfile.php
@@ -16,6 +15,7 @@ services:
     image: mysql
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
+      - keijiban:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
