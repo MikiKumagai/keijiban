@@ -56,7 +56,7 @@
                   <label>三大</label>
                 </div>
                 <div class="col-10">
-                  <input class="form-control" type="text" name="theme" size="30">
+                  <input class="form-control" placeholder="30字以内" type="text" name="theme" size="30">
                 </div>
               </div>
               <div class="p-2">
@@ -68,7 +68,21 @@
               </div>
               <div class="p-2">
                 <label>テーマの説明</label>
-                <textarea class="form-control" name="comment" rows="4" cols="45" placeholder="300字以内"></textarea>
+                <textarea class="form-control" name="comment" id="textarea" rows="4" cols="45"></textarea>
+                <p class="text-end">残り<span class="length">200</span>文字</p>
+                <script>
+                    textArea = document.querySelector('#textarea'); // テキストエリアの要素
+                    const length = document.querySelector('.length'); // 残り文字数を表示させる要素
+                    const maxLength = 200 // 最大文字数
+                    textArea.addEventListener('input', () => {
+                      length.textContent = maxLength - textArea.value.length;
+                      if(maxLength - textArea.value.length < 0){
+                        length.style.color = 'red'; // 最大文字数を超過したら赤字で表示する
+                      }else{
+                        length.style.color = '#444';
+                      }
+                    }, false);
+                </script> 
               </div>
               <div class="text-end p-2">
                 <button type="submit" class="btn btn-primary">作成</button>
@@ -100,7 +114,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <p class="modal-title" id="exampleModalLabel">1人3つ投票できます</p>
+                <p class="modal-title" id="exampleModalLabel">1人1回、3つまで投票できます</p>
               </div>
               <div class="modal-body">
                 <div class="p-4">
@@ -197,7 +211,21 @@
                     <input type="text" name="name" class="form-control" value="名無し">
                   </div>
                   <div class="p-1">
-                    <textarea name="contents" class="form-control" row="3" placeholder="コメントを入力(500字以内)"></textarea>
+                    <textarea name="contents" id="textarea2" class="form-control" row="3" placeholder="コメントを入力"></textarea>
+                    <p class="text-end">残り<span class="length2">200</span>文字</p>
+                    <script>
+                        textArea2 = document.querySelector('#textarea2'); // テキストエリアの要素
+                        const length2 = document.querySelector('.length2'); // 残り文字数を表示させる要素
+                        const maxLength2 = 200 // 最大文字数
+                        textArea2.addEventListener('input', () => {
+                          length2.textContent = maxLength - textArea2.value.length;
+                          if(maxLength - textArea2.value.length < 0){
+                            length2.style.color = 'red'; // 最大文字数を超過したら赤字で表示する
+                          }else{
+                            length2.style.color = '#444';
+                          }
+                        }, false);
+                    </script> 
                   </div>
                   <div class="p-1 text-end">
                     <button type="submit" class="btn btn-primary">送信</button>
