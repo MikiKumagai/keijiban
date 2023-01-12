@@ -7,9 +7,7 @@
 <body>
     
 <?php  
-$db = new PDO(
-    'mysql:host=172.17.0.3;dbname=ranking;','apache_webserver','uwfyzcyr',
-              [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+require_once("DB_connect.php");
 
     try{            
         $Data = $db->prepare('SELECT * FROM plan WHERE thread_id=?');

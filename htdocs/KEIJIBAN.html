@@ -50,7 +50,7 @@
             <p class="modal-title">スレッド設定</p>
           </div>
           <div class="modal-body">
-            <form method="POST" action="plan-insert.php">
+            <form method="POST" action="php/plan-insert.php">
               <div class="row p-2">
                 <div class="col-2">
                   <label>三大</label>
@@ -82,8 +82,7 @@
     <div class="row">
       <div class="col px-5">
         <?php
-              require_once("thread_id.php");    
-              require_once("ke_pl_s.php");
+              require_once("php/ke_pl_s.php");
               ?>
       </div>
     </div>
@@ -106,9 +105,9 @@
               <div class="modal-body">
                 <div class="p-4">
                   <?php
-                      require_once("to_vo_u.php");
-                      require_once("to_vo_i.php");
-                      require_once("to_vo_s.php");
+                      require_once("php/to_vo_u.php");
+                      require_once("php/to_vo_i.php");
+                      require_once("php/to_vo_s.php");
                       ?>
                   <form method="POST" action="">
                     <div class="row pt-3">
@@ -151,7 +150,7 @@
         </script>
 
         <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
-          <?php require_once("ke_vo_s.php"); ?>
+          <?php require_once("php/ke_vo_s.php"); ?>
         </h1>
         <div class="m-3 p-3 bg-success border border-primary">
           <p class="text-center text-dark">
@@ -193,7 +192,7 @@
                 <p class="modal-title" id="exampleModalLabel">投稿</p>
               </div>
               <div class="modal-body">
-                <form method="POST" action="ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
+                <form method="POST" action="php/ke_bb_i.php?thread_id=<?php echo $thread_id; ?>">
                   <div class="p-1">
                     <input type="text" name="name" class="form-control" value="名無し">
                   </div>
@@ -215,7 +214,7 @@
           </div>
           <div class="text-dark">
             <?php
-                require_once("ke_bb_s.php");
+                require_once("php/ke_bb_s.php");
               ?>
           </div>
         </div>

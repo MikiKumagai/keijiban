@@ -4,8 +4,8 @@
     <title>keijiban.php</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./color.css">
+    <link rel="stylesheet" href="./../bootstrap-5.2.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/color.css">
     </head>
 <body>
     
@@ -14,7 +14,7 @@
 
    if(!empty($_POST['entry'])){
     try{
-        $db = new PDO('mysql:host=172.17.0.3;dbname=ranking;','apache_webserver','uwfyzcyr');
+      require_once("DB_connect.php");
 
         $check = $db->prepare("SELECT * FROM vote WHERE name = ? AND thread_id = $thread_id");
         $check->execute(array($_POST['entry']));

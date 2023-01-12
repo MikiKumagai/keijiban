@@ -7,17 +7,15 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./color.css">
+    <link rel="stylesheet" href="./../bootstrap-5.2.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../css/color.css">
 </head>
 
 <body class="bg-light">
 <?php
     
         try{
-            $db = new PDO(
-                'mysql:host=172.17.0.3;dbname=ranking;','apache_webserver','uwfyzcyr',
-                        );
+            require_once("DB_connect.php");
             
             $theme = $_POST['theme'];
             $category = $_POST['category'];
@@ -37,7 +35,7 @@
 ?>
 <div class='text-center m-5'>
     スレッドが作成されました<br>
-    <a crass="btn btn-primary" href="KEIJIBAN.html?thread_id=<?php echo $count; ?>">作成したページを表示する</a>
+    <a crass="btn btn-primary" href="./../KEIJIBAN.html?thread_id=<?php echo $count; ?>">作成したページを表示する</a>
 </div>
 
 </body>
