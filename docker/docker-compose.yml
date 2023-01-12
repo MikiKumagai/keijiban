@@ -9,17 +9,14 @@ services:
       - "80:80"
     volumes:
       - ./../htdocs:/var/www/html
-      - ./../logs/:/var/www/logs
 
   keijiban-mysql:
     image: mysql
     volumes:
       - ./initdb.d:/docker-entrypoint-initdb.d
       - keijiban:/var/lib/mysql
-    ports:
-      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_TCP_PORT=3306
-      - MYSQL_DATABASE=keijiban
-      - BIND-ADDRESS=0.0.0.0
+
+volumes:
+  keijiban:
