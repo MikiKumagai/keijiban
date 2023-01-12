@@ -35,6 +35,7 @@
 ?>
 <div class='text-center m-5'>
     スレッドが作成されました<br>
+    リンク先の投票ボタンを押して、いくつかエントリーしておきましょう！<br>
     <a crass="btn btn-primary" href="./../KEIJIBAN.html?thread_id=<?php echo $count; ?>">作成したページを表示する</a>
 </div>
 
