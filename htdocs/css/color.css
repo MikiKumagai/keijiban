@@ -574,114 +574,151 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 
+
 /*------------------------------------
 - COLOR light
 ------------------------------------*/
+.alert-light {
+    color: #b0b0b0;
+    background-color: #eeeeee;
+    border-color: #b0b0b0;
+}
+
+.alert-light hr {
+    border-top-color: #b0b0b0;
+}
 
 .alert-light .alert-link {
-    color: #af817c;
+    color: #979797;
 }
 
 .badge-light {
     color: #212529;
-    background-color: #F1E9E8;
+    background-color: #eeeeee;
 }
 
 .badge-light[href]:hover, .badge-light[href]:focus {
     color: #212529;
-    background-color: #ddcac8;
+    background-color: #d4d4d4;
 }
 
 .bg-light {
-    background-color: #F1E9E8 !important;
+    background-color: #eeeeee !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
 button.bg-light:focus {
-    background-color: #ddcac8 !important;
+    background-color: #d4d4d4 !important;
 }
 
 .border-light {
-    border-color: #F1E9E8 !important;
+    border-color: #eeeeee !important;
 }
 
 .btn-light {
     color: #212529;
-    background-color: #F1E9E8;
-    border-color: #F1E9E8;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
 }
 
 .btn-light:hover {
     color: #212529;
-    background-color: #e3d3d1;
-    border-color: #ddcac8;
+    background-color: #dcdcdc;
+    border-color: #d4d4d4;
 }
 
 .btn-light:focus, .btn-light.focus {
-    box-shadow: 0 0 0 0.2rem rgba(241, 233, 232, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(238, 238, 238, 0.5);
 }
 
 .btn-light.disabled, .btn-light:disabled {
     color: #212529;
-    background-color: #F1E9E8;
-    border-color: #F1E9E8;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
 }
 
 .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
     color: #212529;
-    background-color: #ddcac8;
-    border-color: #d7c1be;
+    background-color: #d4d4d4;
+    border-color: #cccccc;
 }
 
 .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba(241, 233, 232, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(238, 238, 238, 0.5);
 }
 
 .btn-outline-light {
-    color: #F1E9E8;
+    color: #eeeeee;
     background-color: transparent;
-    border-color: #F1E9E8;
+    border-color: #eeeeee;
 }
 
 .btn-outline-light:hover {
     color: #212529;
-    background-color: #F1E9E8;
-    border-color: #F1E9E8;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
 }
 
 .btn-outline-light:focus, .btn-outline-light.focus {
-    box-shadow: 0 0 0 0.2rem rgba(241, 233, 232, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(238, 238, 238, 0.5);
 }
 
 .btn-outline-light.disabled, .btn-outline-light:disabled {
-    color: #F1E9E8;
+    color: #eeeeee;
     background-color: transparent;
 }
 
 .btn-outline-light:not(:disabled):not(.disabled):active, .btn-outline-light:not(:disabled):not(.disabled).active, .show > .btn-outline-light.dropdown-toggle {
     color: #212529;
-    background-color: #F1E9E8;
-    border-color: #F1E9E8;
+    background-color: #eeeeee;
+    border-color: #eeeeee;
 }
 
 .btn-outline-light:not(:disabled):not(.disabled):active:focus, .btn-outline-light:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-light.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.2rem rgba(241, 233, 232, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(238, 238, 238, 0.5);
+}
+
+.list-group-item-light {
+    color: #b0b0b0;
+    background-color: #b0b0b0;
+}
+
+.list-group-item-light.list-group-item-action:hover, .list-group-item-light.list-group-item-action:focus {
+    color: #b0b0b0;
+    background-color: #b0b0b0;
 }
 
 .list-group-item-light.list-group-item-action.active {
     color: #212529;
-    background-color: #c2a09b;
-    border-color: #c2a09b;
+    background-color: #b0b0b0;
+    border-color: #b0b0b0;
+}
+
+.table-light,
+.table-light > th,
+.table-light > td {
+    background-color: #b0b0b0;
+}
+
+.table-hover .table-light:hover {
+    background-color: #b0b0b0;
+}
+
+.table-hover .table-light:hover > td,
+.table-hover .table-light:hover > th {
+    background-color: #b0b0b0;
 }
 
 .text-light {
-    color: #F1E9E8 !important;
+    color: #eeeeee !important;
 }
 
 a.text-light:hover, a.text-light:focus {
-    color: #ddcac8 !important;
+    color: #d4d4d4 !important;
 }
+
+
 
 
 /* link */
