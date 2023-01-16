@@ -16,9 +16,10 @@
 
             $category = $_REQUEST['id'];
             $sql = "select * from plan WHERE category={$category} order by active DESC";
-            $db -> query($sql);
+            $data = $db -> query($sql);
 
-                foreach ($db -> query($sql) as $row) {
+            if($data->rowCount() > 0){
+                foreach ($data as $row) {
                 echo "<a id=active href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">";
                 echo '<p class="px-4"><font size=5>';
                 echo "三大{$row['theme']}";
@@ -29,6 +30,9 @@
                 echo '</a>';
                 echo '<hr>';
                 }
+            }else{
+                echo 'スレッドがありません';
+            }
         } catch (PDOException $e) {
             echo $e->getMessage();
         
