@@ -21,9 +21,11 @@
             $sql2 = $db->prepare('UPDATE vote SET count = count+1 WHERE id = ?');
             $sql2->execute(array($value));
           }
-          $sql3 = $db->prepare('INSERT INTO user SET IP = ?, thread_id = ?');
-          $sql3->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
-          echo '<script>window.confirm("投票完了しました。")</script>';
+            $sql3 = $db->prepare('INSERT INTO user SET IP = ?, thread_id = ?');
+            $sql3->execute(array($_SERVER['REMOTE_ADDR'], $thread_id));
+            $sql4 = $db->prepare('UPDATE plan SET active=NOW() WHERE thread_id = ?');
+            $sql4->execute(array($thread_id));
+            echo '<script>window.confirm("投票完了しました。")</script>';
         }
      } catch(PDOException $e){
             echo 'エラーが発生しました' . $e->getMessage();
