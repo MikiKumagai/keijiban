@@ -13,19 +13,20 @@
    require_once("thread_id.php");
     
     try {    
-        $stmt = $db->prepare('SELECT * FROM bbs WHERE thread_id=? ORDER BY date DESC');
-        $stmt->execute(array($_REQUEST['thread_id']));
-        $row_count = $stmt->rowCount();
+        $sql = $db->prepare('SELECT * FROM bbs WHERE thread_id=? ORDER BY date DESC');
+        $sql->execute(array($_REQUEST['thread_id']));
 
-        foreach ($stmt as $hyouji) {
+        foreach ($sql as $hyouji) {
             echo '<font size=2>';
-            echo $row_count, ' ';
-            $row_count -= 1;
+            echo $hyouji['comment_id'], ' ';
             echo $hyouji['name'];
             echo '</font>';
             echo '<p class="px-4"><font size=4>';
             echo nl2br($hyouji['contents']);
             echo '</font></p>';
+            echo '<button type="button" class="btn btn-primary" id="to" data-toggle="modal" data-target="#comment">
+            返信
+          </button>';
             echo '<p style="text-align:right"><font size=2>';
             echo $hyouji['date'];
             echo '</font></p>';

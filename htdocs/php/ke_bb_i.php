@@ -14,11 +14,14 @@ require_once("thread_id.php");
 
     if(!empty($_POST['contents'])){
         try{
+            $sql2 = $db->prepare('SELECT MAX(comment_id)+1 FROM bbs WHERE thread_id=?');
+            $sql2->execute(array($_REQUEST['thread_id']));
+
             $sql = $db->prepare('INSERT INTO bbs(contents, date, thread_id, name) VALUES(:contents, NOW(), :thread_id, :name)');
             $sql->execute(array(':contents' => $_POST['contents'], ':thread_id' => $thread_id, ':name'=>$_POST['name']));
 
-            $sql2 = $db->prepare('UPDATE plan SET active=NOW() WHERE thread_id = ?');
-            $sql2->execute(array($thread_id));
+            $sql3 = $db->prepare('UPDATE plan SET active=NOW() WHERE thread_id = ?');
+            $sql3->execute(array($thread_id));
 
             $_POST['contents'] = NULL;
             

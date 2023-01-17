@@ -24,8 +24,9 @@ CREATE TABLE IF NOT EXISTS  ranking.user(
    `thread_id` INT
 );
 CREATE TABLE IF NOT EXISTS  ranking.bbs(
-   `contents`  VARCHAR(200),
-   `date`      DATETIME,
-   `thread_id` INT,
-   `name`      VARCHAR(30)
+   `contents`     VARCHAR(200),
+   `date`         DATETIME,
+   `thread_id`    INT,
+   `name`         VARCHAR(30),
+   `comment_id`   INT
 );
