@@ -24,13 +24,13 @@
             echo '<p class="px-4"><font size=4>';
             echo nl2br($hyouji['contents']);
             echo '</font></p>';
-            echo '<button type="button" class="btn btn-primary" id="to" data-toggle="modal" data-target="#comment">
-            返信
-          </button>';
-            echo '<p style="text-align:right"><font size=2>';
+            echo '<div class="col">';
+            echo '<div class="row">';
+            echo '<div class="col-6"><a href="#" id="to" data-toggle="modal" data-target="#comment">返信</a></div>';
+            echo '<div class="col-6"><p style="text-align:right"><font size=2>';
             echo $hyouji['date'];
-            echo '</font></p>';
-            echo '<hr>';
+            echo '</font></p></div>';
+            echo '</div></div><hr>';
         }
     
     } catch (PDOException $e) {
