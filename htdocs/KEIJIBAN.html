@@ -149,7 +149,6 @@
                     <script>
                         textArea2 = document.querySelector('#textarea2'); // テキストエリアの要素
                         const length2 = document.querySelector('.length2'); // 残り文字数を表示させる要素
-                        const maxLength2 = 200 // 最大文字数
                         textArea2.addEventListener('input', () => {
                           length2.textContent = maxLength - textArea2.value.length;
                           if(maxLength - textArea2.value.length < 0){
