@@ -1,15 +1,3 @@
-// replys = document.querySelectorAll(`[id^='reply']`); //AllでEachに対応
-// length3 = document.querySelectorAll(`[class^='length']`); 
-// replys.forEach((element, index) => // 繰り返し
-// element.addEventListener('input', () => { //element=forEachの要素
-//   length3[index].textContent = maxLength - element.value.length; //index=
-//     if (maxLength - element.value.length < 0) {
-//       length3[index].style.color = 'red';
-//     } else {
-//       length3[index].style.color = '#444';
-//     };
-//   }, false)
-// );
 
 function input(id) {
   div = document.getElementById(id);

@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="./../bootstrap-5.2.2-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./../css/color.css">
+  <script src="./js/count.js"></script>
 </head>
 
 <body>
@@ -37,10 +38,10 @@
                   aria-haspopup="true" aria-expanded="false"> 返信 </button>';
       echo "<form class=\"dropdown-menu px-4 py-3\" method=\"POST\" action=\"php/ke_bb_i.php?thread_id=$thread_id\">";
       echo '<div class="mb-3"> <input type="text" name="name" class="form-control" value="名無し"></div>';
-      echo '<div class="mb-3">';
-      echo "<textarea name=\"contents\" id=\"reply", $hyouji['comment_id'], "\" class=\"form-control\" row=\"3\">";
-      echo '>>', $hyouji['comment_id'], ' </textarea></div>';
-      echo '<div class="mb-1"> <p class="text-end">残り';
+      echo "<div class=\"mb-3\" id=\"count", $hyouji['comment_id'], "\">";
+      echo "<textarea name=\"contents\" id=\"reply", $hyouji['comment_id'], "\" class=\"form-control\" row=\"3\" oninput=\"input('count", $hyouji['comment_id'], "')\">";
+      echo '>>', $hyouji['comment_id'], ' </textarea>';
+      echo '<p class="text-end">残り';
       echo "<span class=\"length", $hyouji['comment_id'], "\">197</span>";
       echo '文字</p></div>';
       echo '<div class="mb-1 text-end"> <button type="submit" class="btn btn-primary">送信</button></div>
@@ -54,21 +55,6 @@
     $db = null;
   }
   ?>
-
-  <script>
-    replys = document.querySelectorAll(`[id^='reply']`); // テキストエリアの要素
-    length3 = document.querySelectorAll(`[class^='length']`); // 残り文字数を表示させる要素
-    replys.forEach((element, index) =>
-    element.addEventListener('input', () => {
-      length3[index].textContent = maxLength - element.value.length;
-        if (maxLength - element.value.length < 0) {
-          length3[index].style.color = 'red'; // 最大文字数を超過したら赤字で表示する
-        } else {
-          length3[index].style.color = '#444';
-        };
-      }, false)
-    );
-  </script>
 
 </body>
 
