@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/color.css">
+  <script src="./js/twitter.js"></script>
+  <script src="./js/count.js"></script>
 </head>
 
 <body class="bg-light" style="padding-top: 5rem">
@@ -61,30 +63,6 @@
             </div>
           </div>
         </div>
-        <script>
-          function click_cb() {
-            var check_count = 0;
-            $(".chkbx input[type='checkbox']").each(function () {
-              if ($(this).prop('checked')) {
-                check_count = check_count + 1;
-              }
-            });
-            if (check_count > 2) {
-              $(".chkbx input[type='checkbox']").each(function () {
-                if (!$(this).prop('checked')) {
-                  $(this).prop('disabled', true);
-                }
-              });
-            } else {
-              $(".chkbx input[type='checkbox']").each(function () {
-                if (!$(this).prop('checked')) {
-                  $(this).prop('disabled', false);
-                }
-              });
-            }
-            return false;
-          }
-        </script>
 
         <h1 class="display-5 lh-base text-center text-dark bg-success m-3 p-3 border border-primary" id="name">
           <?php require_once("php/ke_vo_s.php"); ?>
@@ -94,27 +72,20 @@
             この結果をツイートして、もっと議論を盛り上げよう！
           </p>
           <div class="text-end px-4">
+            <?php
+                  $theme = $hyouji['theme'];
+                  $theme_json = json_encode($theme);
+                  $vote_json = json_encode($vote);
+                ?>
+            <script>
+                var theme = JSON.parse('<?php echo $theme_json; ?>');
+                var name = JSON.parse('<?php echo $vote_json; ?>');
+            </script>
             <button class="btn btn-primary rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
           </div>
-          <?php
-                $theme = $hyouji['theme'];
-                $theme_json = json_encode($theme);
-                $vote_json = json_encode($vote);
-              ?>
-          <script>
-            function onClickTweet() {
-              var theme_json = JSON.parse('<?php echo $theme_json; ?>');
-              var theme = theme_json;
-              var vote_json = JSON.parse('<?php echo $vote_json; ?>');
-              var name = vote_json;
-              var tw_contents = ("「三大" + theme + "」は、" + name + "です。");
-              var url = encodeURIComponent(document.location);
-              window.open().location.href = ("https://twitter.com/share?url=" + url + "&text=" + tw_contents + "&count=none&lang=ja");
-            };
-          </script>
         </div>
       </div>
-
+          
       <div class="col-md-8">
         <div class="d-grid gap-2 m-3">
           <button type="button" class="btn btn-primary" id="to" data-toggle="modal" data-target="#comment">
@@ -133,8 +104,8 @@
                   <div class="p-1">
                     <input type="text" name="name" class="form-control" value="名無し">
                   </div>
-                  <div class="p-1">
-                    <textarea name="contents" id="textarea2" class="form-control" row="3" placeholder="コメントを入力"></textarea>
+                  <div class="p-1" id="count">
+                    <textarea name="contents" id="textarea2" class="form-control" row="3" placeholder="コメントを入力" oninput="input('count')"></textarea>
                     <p class="text-end">残り<span class="length2">200</span>文字</p>
                   </div>
                   <div class="p-1 text-end">
@@ -145,20 +116,6 @@
             </div>
           </div>
         </div>
-        
-                    <script>
-                        textArea2 = document.querySelector('#textarea2'); // テキストエリアの要素
-                        const length2 = document.querySelector('.length2'); // 残り文字数を表示させる要素
-                        textArea2.addEventListener('input', () => {
-                          length2.textContent = maxLength - textArea2.value.length;
-                          if(maxLength - textArea2.value.length < 0){
-                            length2.style.color = 'red'; // 最大文字数を超過したら赤字で表示する
-                          }else{
-                            length2.style.color = '#444';
-                          }
-                        }, false);
-                    </script> 
-
         <div class="bg-success m-3 p-3 border border-primary">
           <div class="text-end">
             <a class="btn btn-outline-primary" href="KEIJIBAN.html?thread_id=<?php echo $thread_id; ?>">更新</a>

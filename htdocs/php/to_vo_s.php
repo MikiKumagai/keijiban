@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./../bootstrap-5.2.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./../css/color.css">
+    <script src="./js/checkbox.js"></script>
     </head>
 <body>
     
