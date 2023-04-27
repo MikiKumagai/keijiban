@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>vote-select</title>
     <meta charset="utf-8">
@@ -9,30 +10,29 @@
 </head>
 
 <body>
-    
-<?php  
-   require_once("thread_id.php");
-    
+
+    <?php
+    require_once("thread_id.php");
+
 
     try {
         $stmt = $db->prepare('SELECT * FROM vote WHERE thread_id=? ORDER BY count DESC LIMIT 3');
         $stmt->execute(array($thread_id));
-      
+
         $vote[] = [];
         foreach ($stmt as $row) {
-            echo $row['name'].'<br>';
+            echo $row['name'] . '<br>';
             $vote[] = $row['name'];
         }
-    
     } catch (PDOException $e) {
         echo $e->getMessage();
-    
     } finally {
         $pdo = null;
     }
-    
+
 
     ?>
 
 </body>
+
 </html>

@@ -78,14 +78,14 @@
                   $vote_json = json_encode($vote);
                 ?>
             <script>
-                var theme = JSON.parse('<?php echo $theme_json; ?>');
-                var name = JSON.parse('<?php echo $vote_json; ?>');
+              var theme = JSON.parse('<?php echo $theme_json; ?>');
+              var name = JSON.parse('<?php echo $vote_json; ?>');
             </script>
             <button class="btn btn-primary rounded-pill" id="twitter_button" onclick="onClickTweet()">tweet</button>
           </div>
         </div>
       </div>
-          
+
       <div class="col-md-8">
         <div class="d-grid gap-2 m-3">
           <button type="button" class="btn btn-primary" id="to" data-toggle="modal" data-target="#comment">
@@ -105,7 +105,8 @@
                     <input type="text" name="name" class="form-control" value="名無し">
                   </div>
                   <div class="p-1" id="count">
-                    <textarea name="contents" id="textarea2" class="form-control" row="3" placeholder="コメントを入力" oninput="input('count')"></textarea>
+                    <textarea name="contents" id="textarea2" class="form-control" row="3" placeholder="コメントを入力"
+                      oninput="input('count')"></textarea>
                     <p class="text-end">残り<span class="length2">200</span>文字</p>
                   </div>
                   <div class="p-1 text-end">
