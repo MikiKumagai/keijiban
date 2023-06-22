@@ -1,12 +1,13 @@
 
 function input(id) {
   div = document.getElementById(id);
-  textArea2 = div.children[0];
-  length2 = div.children[1].children[0];
-  length2.textContent = maxLength - textArea2.value.length;
-  if (maxLength - textArea2.value.length < 0) {
-    length2.style.color = 'red';
+  textArea = div.children[0];
+  length = div.children[1].children[0];
+  const maxLength = 200;
+  length.textContent = maxLength - textArea.value.length;
+  if (maxLength - textArea.value.length < 0) {
+    length.style.color = 'red';
   } else {
-    length2.style.color = '#444';
+    length.style.color = '#444';
   }
 }

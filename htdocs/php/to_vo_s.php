@@ -23,17 +23,18 @@
         if ($data->rowCount() > 2) {
 
             echo '<form action="" method="post">';
-            echo '<div class="chkbx">';
-            foreach ($data as $row) {
-                echo '<label>';
-                echo '<input class="form-check-input" type="checkbox" name="vote[]" value="' . $row['id'] . '" onclick="click_cb();">' . ' ' . $row['name'] . ' ' . $row['count'] . '票';
-                echo '</label>';
-                echo '<br>';
-            }
-            echo '</div>';
-            echo '<div class="text-end">';
-            echo '<button type="submit" class="btn btn-primary">投票</button>';
-            echo '</div>';
+                echo '<div class="chkbx">';
+                    foreach ($data as $row) {
+                        echo '<label>';
+                        echo '<input class="form-check-input" type="checkbox" name="vote[]" value="' . 
+                            $row['id'] . '" onclick="click_cb();">' . ' ' . $row['name'] . ' ' . $row['count'] . '票';
+                        echo '</label>';
+                        echo '<br>';
+                    }
+                echo '</div>';
+                echo '<div class="text-end">';
+                   echo '<button type="submit" class="btn btn-primary">投票</button>';
+                echo '</div>';
             echo '</form>';
         } else {
             foreach ($data as $row) {
@@ -41,9 +42,7 @@
                 echo '<br>';
             }
             echo '<br>';
-            echo 'あと';
-            echo 3 - $data->rowCount();
-            echo 'つ以上のエントリーで投票できます';
+            echo 'あと', 3 - $data->rowCount(), 'つ以上のエントリーで投票できます';
         }
     } catch (PDOException $e) {
         echo 'エラーが発生しました' . $e->getMessage();

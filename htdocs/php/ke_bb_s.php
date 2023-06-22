@@ -22,32 +22,45 @@
     $sql->execute(array($_REQUEST['thread_id']));
 
     foreach ($sql as $hyouji) {
-      echo '<font size=2>';
-      echo $hyouji['comment_id'], ' ';
-      echo $hyouji['name'];
-      echo '</font>';
-      echo '<p class="px-4"><font size=4>';
-      echo nl2br($hyouji['contents']);
-      echo '</font></p>';
-      echo '<p style="text-align:right"><font size=2>';
-      echo $hyouji['date'];
-      echo '</font></p>';
-
-      echo '<div class="dropdown">';
-      echo '<button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" 
-                  aria-haspopup="true" aria-expanded="false"> 返信 </button>';
-      echo "<form class=\"dropdown-menu px-4 py-3\" method=\"POST\" action=\"php/ke_bb_i.php?thread_id=$thread_id\">";
-      echo '<div class="mb-3"> <input type="text" name="name" class="form-control" value="名無し"></div>';
-      echo "<div class=\"mb-3\" id=\"count", $hyouji['comment_id'], "\">";
-      echo "<textarea name=\"contents\" id=\"reply", $hyouji['comment_id'], "\" class=\"form-control\" row=\"3\" oninput=\"input('count", $hyouji['comment_id'], "')\">";
-      echo '>>', $hyouji['comment_id'], ' </textarea>';
-      echo '<p class="text-end">残り';
-      echo "<span class=\"length", $hyouji['comment_id'], "\">197</span>";
-      echo '文字</p></div>';
-      echo '<div class="mb-1 text-end"> <button type="submit" class="btn btn-primary">送信</button></div>
-                  </form></div>';
-
-      echo '<hr>';
+      $contents = nl2br($hyouji['contents']);
+      echo <<<EOS
+        <font size=2>
+          {$hyouji['comment_id']}{$hyouji['name']}
+        </font>
+        <p class="px-4">
+          <font size=4>
+            $contents
+          </font>
+        </p>
+        <p style="text-align:right">
+          <font size=2>
+            {$hyouji['date']}
+          </font>
+        </p>
+        <div class="dropdown">
+          <button class="btn btn-primary btn-sm dropdown-toggle" type="button" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            返信
+          </button>
+          <form class="dropdown-menu px-4 py-3" method="POST" action="php/ke_bb_i.php?thread_id=$thread_id">
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" value="名無し">
+            </div>
+            <div class="mb-3" id="count{$hyouji['comment_id']}">
+              <textarea name="contents" class="form-control" row="3" oninput="input('count{$hyouji['comment_id']}')">
+                >>{$hyouji['comment_id']}
+              </textarea>
+              <p class="text-end">
+                残り<span>197</span>文字
+              </p>
+            </div>
+            <div class="mb-1 text-end">
+              <button type="submit" class="btn btn-primary">送信</button>
+            </div>
+          </form>
+        </div>
+        <hr>
+      EOS;
     }
   } catch (PDOException $e) {
     echo $e->getMessage();

@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="bootstrap-5.2.2-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/color.css">
+  <script src="./js/count.js"></script>
 </head>
 
 <body>
@@ -66,21 +67,11 @@
             </div>
             <div class="p-2">
               <label>テーマの説明</label>
-              <textarea class="form-control" name="comment" id="textarea" rows="4" cols="45"></textarea>
-              <p class="text-end">残り<span class="length">200</span>文字</p>
-              <script>
-                textArea = document.querySelector('#textarea'); // テキストエリアの要素
-                const length = document.querySelector('.length'); // 残り文字数を表示させる要素
-                const maxLength = 200 // 最大文字数
-                textArea.addEventListener('input', () => {
-                  length.textContent = maxLength - textArea.value.length;
-                  if (maxLength - textArea.value.length < 0) {
-                    length.style.color = 'red'; // 最大文字数を超過したら赤字で表示する
-                  } else {
-                    length.style.color = '#444';
-                  }
-                }, false);
-              </script>
+              <div id="count_thread">
+                <textarea class="form-control" name="comment" rows="4" cols="45"
+                  oninput="input('count_thread')"></textarea>
+                <p class="text-end">残り<span>200</span>文字</p>
+              </div>
             </div>
             <div class="text-end p-2">
               <button type="submit" class="btn btn-primary">作成</button>

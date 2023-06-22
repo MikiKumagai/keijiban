@@ -21,15 +21,21 @@
 
         if ($data->rowCount() > 0) {
             foreach ($data as $row) {
-                echo "<a id=active href=\"KEIJIBAN.html?thread_id={$row['thread_id']}\">";
-                echo '<p class="px-4"><font size=5>';
-                echo "三大{$row['theme']}";
-                echo '</font>';
-                echo '<p class="px-4" style="text-align:right"><font size=2>';
-                echo " {$row['active']} 更新";
-                echo '</font>';
-                echo '</a>';
-                echo '<hr>';
+                echo <<<EOS
+                <a id=active href="KEIJIBAN.html?thread_id={$row['thread_id']}">
+                    <p class="px-4">
+                        <font size=5>
+                            三大{$row['theme']}
+                        </font>
+                    </p>
+                    <p class="px-4" style="text-align:right">
+                        <font size=2>
+                            {$row['active']} 更新
+                        </font>
+                    </p>
+                </a>
+                <hr>
+                EOS;
             }
         } else {
             echo 'スレッドがありません';
